@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ranno"
+version = "0.1.0"
+description = "A minimalist AI-Bridge for instant code generation and sandboxed execution."
+authors = [{name = "Saptarshi Roy"}]
+license = "MIT"
+readme = "README.md"
+
+requires-python = ">=3.7"
+dependencies = ["requests", "numpy", "pandas", "magika"]
+
+[project.urls]
+Repository = "https://github.com/saptarshiroy39/Ranno"
+Homepage = "https://pypi.org/project/ranno/"
+
+[tool.setuptools]
+packages = ["ranno"]
