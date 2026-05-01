@@ -1,12 +1,11 @@
 <h1 align="center">
-  <img src="./public/Ranno.png" alt="🦎" width="64">
+  <img src="https://raw.githubusercontent.com/saptarshiroy39/Ranno/main/public/Ranno.svg" alt="🦖" width="128">
   <br>
   <b>Ranno</b>
 </h1>
 
 <p align="center">
-  <a href="https://github.com/saptarshiroy39/Ranno"><b>Ranno</b></a> is a minimalist <b>AI-Bridge</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
-
+  <a href="https://pypi.org/project/ranno/"><b>Ranno</b></a> is a minimalist <b>AI-Bridge</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
 </p>
 
 <p align="center">
