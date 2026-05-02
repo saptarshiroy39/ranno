@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import shutil
 from pathlib import Path
+import matplotlib.pyplot as plt
+import seaborn as sns
 from .gn import gn, AIResult
 
 def ex(prompt: str, data: str | None = None) -> AIResult:
@@ -17,7 +19,13 @@ def ex(prompt: str, data: str | None = None) -> AIResult:
         shutil.copy2(original_path, backup_path)
 
     try:
-        exec_environment = {"pd": pd, "np": np, "__builtins__": __builtins__}
+        exec_environment = {
+            "pd": pd, 
+            "np": np, 
+            "plt": plt, 
+            "sns": sns, 
+            "__builtins__": __builtins__
+        }
         exec(code, exec_environment)
         
         if backup_path:

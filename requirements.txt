@@ -4,6 +4,8 @@ pydantic
 python-dotenv
 google-generativeai
 requests
+magika
 pandas
 numpy
-magika
+seaborn
+matplotlib

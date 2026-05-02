@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.1.1"
+version = "0.1.2"
 description = "A minimalist AI-Bridge for instant code generation and sandboxed execution."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
 readme = "README.md"
 
 requires-python = ">=3.7"
-dependencies = ["requests", "numpy", "pandas", "magika"]
+dependencies = ["requests", "magika", "numpy", "pandas", "seaborn", "matplotlib"]
 
 [project.urls]
 Repository = "https://github.com/saptarshiroy39/Ranno"
