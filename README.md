@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://pypi.org/project/ranno/"><b>🔗 <code>PyPI Package</code></b></a>
   &nbsp;|&nbsp;
-  🆔 <code>pip install ranno</code>
+  🆔 <code>pip install ranno</code> or <code>uv add ranno</code>
 </p>
 
 ---
@@ -22,6 +22,8 @@
 
 ```bash
 pip install ranno
+# or
+uv add ranno
 ```
 
 `Generate Code (No Execution)`
