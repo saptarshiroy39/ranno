@@ -50,6 +50,21 @@ ex("Print hello world 5 times")
 ex("Plot the correlation between price and category", data="data.csv")
 ```
 
+`Custom Configuration (API & Model)`
+
+```python
+from ranno import cf, gn, ex
+
+# Set custom credentials and model
+my_config = cf(api_key="your_api_key", model="model_name")
+
+# Run with custom config
+gn("Explain quantum physics", config=my_config)
+
+# Excute with custom config
+ex("Plot the correlation between price and category", data="data.csv", config=my_config)
+```
+
 ---
 
 ## ✨ _Features_
@@ -60,8 +75,9 @@ ex("Plot the correlation between price and category", data="data.csv")
 | 🔍 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
 | 📊 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically  |
 | 🧪 **Sandboxed Execution**    | Runs AI code in an isolated environment with `pd`, `np` pre-loaded        |
-| 🛡️ **Shadow Copy Integrity**  | Creates a hidden `.back` snapshot before execution; restores on failure   |
-| 🦎 **Ultra Minimalism**       | Two functions (`gn`, `ex`) is all you need - zero boilerplate             |
+| ⚙️ **Custom Configuration**    | Override default API keys and Models per request using `cf()`             |
+| 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure   |
+| 🦎 **Ultra Minimalism**       | Three functions (`gn`, `ex`, `cf`) is all you need - zero boilerplate     |
 
 ---
 

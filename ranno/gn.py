@@ -1,18 +1,19 @@
-import requests
-import pandas as pd
 from pathlib import Path
+
+import requests
 from magika import Magika
+import pandas as pd
+
 
 BASE_URL = "https://ranno.vercel.app"
 m = Magika()
 
 class AIResult(str):
-    def __repr__(self) -> str:
-        return ""
+    def __repr__(self): return ""
 
-def gn(prompt: str, data: str | None = None) -> AIResult:
+def gn(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult:
     if not data:
-        return _send_request(prompt)
+        return _send_request(prompt, config)
 
     path = Path(data)
     try:
@@ -37,14 +38,17 @@ def gn(prompt: str, data: str | None = None) -> AIResult:
             f"df = pd.{method}('{data}')\n\n"
             f"Task: {prompt}"
         )
-        return _send_request(context)
+        return _send_request(context, config)
 
     except Exception as e:
         return AIResult(f"# Error: {e}")
 
-def _send_request(prompt: str) -> AIResult:
+def _send_request(prompt: str, config: dict | None = None) -> AIResult:
     try:
         payload = {"prompt": prompt}
+        if config:
+            payload.update(config)
+            
         response = requests.post(f"{BASE_URL}/generate", json=payload, timeout=30)
         code = response.json().get("code", "# No result found")
         print(code)
