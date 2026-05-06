@@ -1,8 +1,10 @@
 import os
+
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from fastapi.responses import FileResponse
+
 import google.generativeai as genai
 
 load_dotenv()
@@ -13,11 +15,12 @@ model = genai.GenerativeModel('gemini-3.1-flash-lite-preview')
 
 class PromptRequest(BaseModel):
     prompt: str
+    api_key: str | None = None
+    model: str | None = None
 
 @app.get("/")
 async def root():
     return {"message": "Ranno is running"}
-
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
@@ -26,13 +29,19 @@ async def favicon():
 @app.post("/generate")
 async def generate(request: PromptRequest):
     try:
+        current_api_key = request.api_key or os.getenv("GEMINI_API_KEY")
+        current_model_name = request.model or 'gemini-3.1-flash-lite-preview'
+        
+        genai.configure(api_key=current_api_key)
+        client = genai.GenerativeModel(current_model_name)
+
         prompt = (
             f"Write the full, complete, and raw Python code for the following request: {request.prompt}. "
             "IMPORTANT: Do NOT use ellipses (...), do NOT use placeholders, and do NOT skip any lines. "
             "Do NOT use markdown backticks (```). Return ONLY the raw code."
         )
         
-        response = model.generate_content(prompt)
+        response = client.generate_content(prompt)
         clean_code = response.text.replace("```python", "").replace("```", "").strip()
         return {"code": clean_code}
  
