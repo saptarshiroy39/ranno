@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from .gn import gn, AIResult
+from ._gn import gn, AIResult
 
 
 def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult:
