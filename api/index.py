@@ -10,9 +10,6 @@ import google.generativeai as genai
 load_dotenv()
 app = FastAPI()
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-3.1-flash-lite-preview')
-
 class PromptRequest(BaseModel):
     prompt: str
     api_key: str | None = None
@@ -20,7 +17,7 @@ class PromptRequest(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"message": "Ranno is running"}
+    return {"name": "Ranno API", "version": "0.2.2", "status": "OK"}
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
