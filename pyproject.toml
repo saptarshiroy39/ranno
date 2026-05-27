@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.2.1"
-description = "A minimalist AI-Bridge for instant code generation and sandboxed execution."
+version = "0.2.2"
+description = "Instant code generation & sandboxed execution from prompts."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
 readme = "README.md"
