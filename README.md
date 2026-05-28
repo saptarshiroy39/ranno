@@ -5,11 +5,11 @@
 </h1>
 
 <p align="center">
-  <a href="https://pypi.org/project/ranno/"><b>Ranno</b></a> is a minimalist <b>AI-Bridge</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
+  <a href="https://pypi.org/project/ranno"><b>Ranno</b></a> is a minimalist <b>AI-Bridge</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/ranno/"><b>🔗 <code>PyPI Package</code></b></a>
+  <a href="https://pypi.org/project/ranno"><b>🔗 <code>PyPI Package</code></b></a>
   &nbsp;|&nbsp;
   🆔 <code>pip install ranno</code> or <code>uv add ranno</code>
 </p>
@@ -38,7 +38,7 @@ gn("Create a list of 10 dinosaurs and print it")
 gn("Find the average price", data="data.csv")
 ```
 
-`Execute Code Instantly (Sandboxed)`
+`Execute Code Instantly (Auto-Backup)`
 
 ```python
 from ranno import ex
@@ -74,8 +74,8 @@ ex("Plot the correlation between price and category", data="data.csv", config=my
 | 🧠 **AI Code Generation**     | Turns plain English prompts into full, runnable Python scripts            |
 | 🔍 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
 | 📊 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically  |
-| 🧪 **Sandboxed Execution**    | Runs AI code in an isolated environment with `pd`, `np` pre-loaded        |
-| ⚙️ **Custom Configuration**    | Override default API keys and Models per request using `cf()`             |
+| 🧪 **Instant Execution**      | Runs AI-generated Python code directly with automated error handling      |
+| ⚙️ **Custom Configuration**   | Override default API keys and Models per request using `cf()`             |
 | 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure   |
 | 🦎 **Ultra Minimalism**       | Three functions (`gn`, `ex`, `cf`) is all you need - zero boilerplate     |
 

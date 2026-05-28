@@ -1,11 +1,6 @@
 from pathlib import Path
 import shutil
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 from ._gn import gn, AIResult
 
 
@@ -22,8 +17,7 @@ def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
         shutil.copy2(original_path, backup_path)
 
     try:
-        sand_env = {"pd": pd, "np": np, "plt": plt, "sns": sns, "__builtins__": __builtins__}
-        exec(code, sand_env)
+        exec(code, globals())
         
         if backup_path: 
             backup_path.unlink(missing_ok=True)
@@ -31,5 +25,5 @@ def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
 
     except Exception as e:
         if backup_path and backup_path.exists():
-            print(f"# Execution failed. Data preserved at {backup_path.name}")
+            backup_path.replace(original_path)
         return AIResult(f"# Error: {e}")

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 import google.generativeai as genai
 
+
 load_dotenv()
 app = FastAPI()
 
@@ -16,8 +17,9 @@ class PromptRequest(BaseModel):
     model: str | None = None
 
 @app.get("/")
+@app.head("/") # UptimeRobot
 async def root():
-    return {"name": "Ranno API", "version": "0.2.2", "status": "OK"}
+    return {"name": "Ranno API", "version": "0.3.0", "status": "OK"}
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
@@ -41,6 +43,6 @@ async def generate(request: PromptRequest):
         response = client.generate_content(prompt)
         clean_code = response.text.replace("```python", "").replace("```", "").strip()
         return {"code": clean_code}
- 
+
     except Exception as e:
         return {"code": f"# AI Error: {str(e)}"}

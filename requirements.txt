@@ -6,6 +6,3 @@ google-generativeai
 requests
 magika
 pandas
-numpy
-seaborn
-matplotlib
