@@ -4,18 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.2.2"
-description = "Instant code generation & sandboxed execution from prompts."
+version = "0.3.0"
+description = "Instant code generation & execution from prompts."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
 readme = "README.md"
 
 requires-python = ">=3.7"
-dependencies = ["requests", "magika", "numpy", "pandas", "matplotlib", "seaborn"]
+dependencies = ["requests", "magika", "pandas"]
 
 [project.urls]
 Repository = "https://github.com/saptarshiroy39/Ranno"
-Homepage = "https://pypi.org/project/ranno/"
+Homepage = "https://pypi.org/project/ranno"
 
 [tool.setuptools]
 packages = ["ranno"]
