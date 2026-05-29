@@ -51,6 +51,7 @@ def _send_request(prompt: str, config: dict | None = None) -> AIResult:
             
         response = requests.post(f"{BASE_URL}/generate", json=payload, timeout=30)
         code = response.json().get("code", "# No result found")
+        print(code)
         return AIResult(code)
 
     except Exception as e:

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.3.0"
+version = "0.3.1"
 description = "Instant code generation & execution from prompts."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
