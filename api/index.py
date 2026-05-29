@@ -19,7 +19,7 @@ class PromptRequest(BaseModel):
 @app.get("/")
 @app.head("/") # UptimeRobot
 async def root():
-    return {"name": "Ranno API", "version": "0.3.0", "status": "OK"}
+    return {"name": "Ranno API", "version": "0.3.1", "status": "OK"}
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
