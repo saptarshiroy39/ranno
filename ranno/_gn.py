@@ -4,12 +4,14 @@ import requests
 from magika import Magika
 import pandas as pd
 
-
 BASE_URL = "https://ranno.vercel.app"
 m = Magika()
 
+
 class AIResult(str):
-    def __repr__(self): return ""
+    def __repr__(self):
+        return ""
+
 
 def gn(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult:
     if not data:
@@ -19,13 +21,13 @@ def gn(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
     try:
         file_info = m.identify_path(path)
         label = file_info.output.label
-        
-        if label == 'csv':
-            df, method = pd.read_csv(path, nrows=5), 'read_csv'
-        elif label in ['excel', 'xlsx', 'xls']:
-            df, method = pd.read_excel(path, nrows=5), 'read_excel'
-        elif label == 'json':
-            df, method = pd.read_json(path), 'read_json'
+
+        if label == "csv":
+            df, method = pd.read_csv(path, nrows=5), "read_csv"
+        elif label in ["excel", "xlsx", "xls"]:
+            df, method = pd.read_excel(path, nrows=5), "read_excel"
+        elif label == "json":
+            df, method = pd.read_json(path), "read_json"
         else:
             return AIResult(f"# Error: Unsupported file type '{label}'")
 
@@ -43,12 +45,13 @@ def gn(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
     except Exception as e:
         return AIResult(f"# Error: {e}")
 
+
 def _send_request(prompt: str, config: dict | None = None) -> AIResult:
     try:
         payload = {"prompt": prompt}
         if config:
             payload.update(config)
-            
+
         response = requests.post(f"{BASE_URL}/generate", json=payload, timeout=30)
         code = response.json().get("code", "# No result found")
         print(code)

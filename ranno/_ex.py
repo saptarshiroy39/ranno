@@ -6,7 +6,7 @@ from ._gn import gn, AIResult
 
 def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult:
     code = gn(prompt, data, config)
-    
+
     if not code or code.startswith("# Error"):
         return code
 
@@ -18,8 +18,8 @@ def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
 
     try:
         exec(code, globals())
-        
-        if backup_path: 
+
+        if backup_path:
             backup_path.unlink(missing_ok=True)
         return AIResult(code)
 

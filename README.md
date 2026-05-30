@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://pypi.org/project/ranno"><b>Ranno</b></a> is a minimalist <b>AI-Bridge</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
+  <a href="https://pypi.org/project/ranno"><b>Ranno</b></a> is a <b>Python Library</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
 </p>
 
 <p align="center">
@@ -55,13 +55,13 @@ ex("Plot the correlation between price and category", data="data.csv")
 ```python
 from ranno import cf, gn, ex
 
-# Set custom credentials and model
+# Set custom credentials & model (Only Gemini models are supported)
 my_config = cf(api_key="your_api_key", model="model_name")
 
 # Run with custom config
-gn("Explain quantum physics", config=my_config)
+gn("Plot Sine Wave", config=my_config)
 
-# Excute with custom config
+# Execute with custom config
 ex("Plot the correlation between price and category", data="data.csv", config=my_config)
 ```
 
@@ -72,21 +72,21 @@ ex("Plot the correlation between price and category", data="data.csv", config=my
 | FEATURE                       | DESCRIPTION                                                               |
 | ----------------------------- | ------------------------------------------------------------------------- |
 | 🧠 **AI Code Generation**     | Turns plain English prompts into full, runnable Python scripts            |
-| 🔍 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
-| 📊 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically  |
+| 📁 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
+| 🔍 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically  |
 | 🧪 **Instant Execution**      | Runs AI-generated Python code directly with automated error handling      |
 | ⚙️ **Custom Configuration**   | Override default API keys and Models per request using `cf()`             |
 | 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure   |
-| 🦎 **Ultra Minimalism**       | Three functions (`gn`, `ex`, `cf`) is all you need - zero boilerplate     |
+| 🦖 **Ultra Minimalism**       | Three functions (`gn`, `ex`, `cf`) is all you need - zero boilerplate     |
 
 ---
 
 ## 🏗️ _System Architecture_
 
-| #   | COMPONENT         | DESCRIPTION                                              | STACK                                         |
-| --- | ----------------- | -------------------------------------------------------- | --------------------------------------------- |
-| 1️⃣  | **Ranno SDK**     | The client-side library handling data prep and execution | **_Python_**, **_Pandas_**, **_Magika_**      |
-| 2️⃣  | **AI Bridge API** | Serverless backend for secure code generation            | **_FastAPI_**, **_Vercel_**, **_Gemini 3.1_** |
+| #   | COMPONENT     | DESCRIPTION                                            | STACK                                     |
+| --- | ------------- | ------------------------------------------------------ | ----------------------------------------- |
+| 1️⃣  | **Ranno SDK** | The client-side library handling data prep & execution | **_Python_**, **_Magika_**, **_Pandas_**  |
+| 2️⃣  | **Ranno API** | Serverless backend for secure code generation          | **_FastAPI_**, **_Vercel_**, **_Gemini_** |
 
 ---
 
