@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://pypi.org/project/ranno"><b>Ranno</b></a> is a <b>Python Library</b> that turns plain English into executable Python - instantly. Just describe what you want, and Ranno generates, understands your data, and runs the code for you.
+  <a href="https://pypi.org/project/ranno"><b>Ranno</b></a> is a lightweight Python Library that converts prompts into fully-functional Python scripts, scans dataset columns automatically, and runs code safely with automated rollback file protection.
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@ uv add ranno
 from ranno import gn
 
 # Without Data
-gn("Create a list of 10 dinosaurs and print it")
+gn("Create a list of 10 dinosaurs")
 
 # With Data
 gn("Find the average price", data="data.csv")
@@ -47,7 +47,7 @@ from ranno import ex
 ex("Print hello world 5 times")
 
 # With Data
-ex("Plot the correlation between price and category", data="data.csv")
+ex("Plot price vs category", data="data.csv")
 ```
 
 `Custom Configuration (API & Model)`
@@ -55,14 +55,14 @@ ex("Plot the correlation between price and category", data="data.csv")
 ```python
 from ranno import cf, gn, ex
 
-# Set custom credentials & model (Only Gemini models are supported)
-my_config = cf(api_key="your_api_key", model="model_name")
+# Set custom credentials & model (Gemini only)
+my_cfg = cf(api_key="api_key", model="model_name")
 
 # Run with custom config
-gn("Plot Sine Wave", config=my_config)
+gn("Plot Sine Wave", config=my_cfg)
 
 # Execute with custom config
-ex("Plot the correlation between price and category", data="data.csv", config=my_config)
+ex("Plot correlation", data="data.csv", config=my_cfg)
 ```
 
 ---
