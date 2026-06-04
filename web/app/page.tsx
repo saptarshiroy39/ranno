@@ -234,14 +234,16 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 </div>
               </div>
 
-              <div className="flex items-center justify-between bg-muted border border-border rounded-xl px-4 py-3 font-mono text-sm text-foreground">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-muted-foreground">$</span>
-                  <span>{installCommands[installManager]}</span>
+              <div className="relative bg-muted border border-border rounded-xl p-4 mt-3 flex-shrink-0 overflow-hidden min-h-[56px] flex items-center">
+                <div className="font-geist text-sm text-foreground leading-[1.65] whitespace-pre-wrap break-words pr-8">
+                  <span className="text-stone-400 dark:text-stone-500 italic">
+                    $
+                  </span>{" "}
+                  {installCommands[installManager]}
                 </div>
                 <button
                   onClick={copyInstall}
-                  className="text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-lg border border-border bg-card cursor-pointer"
+                  className="absolute top-3.5 right-3.5 text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-lg border border-border bg-card cursor-pointer"
                   id="hero-copy-install"
                   title="Copy command"
                 >
