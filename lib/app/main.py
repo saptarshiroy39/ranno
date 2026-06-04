@@ -1,14 +1,27 @@
 import os
-
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from dotenv import load_dotenv
-
 import google.generativeai as genai
 
-load_dotenv()
-app = FastAPI()
+from app.config import APP_NAME, APP_VERSION, CORS_ORIGINS, ENV
+
+app = FastAPI(
+    title=APP_NAME,
+    version=APP_VERSION,
+    docs_url=None if ENV == "production" else "/docs",
+    redoc_url=None if ENV == "production" else "/redoc",
+    openapi_url=None if ENV == "production" else "/openapi.json",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class PromptRequest(BaseModel):
@@ -20,12 +33,19 @@ class PromptRequest(BaseModel):
 @app.get("/")
 @app.head("/")  # UptimeRobot
 async def root():
-    return {"name": "Ranno API", "version": "0.3.2", "status": "OK"}
+    return {
+        "name": APP_NAME,
+        "version": APP_VERSION,
+        "status": "OK"
+    }
 
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
-    return FileResponse("api/favicon.ico")
+    favicon_path = os.path.join("app", "static", "favicon.ico")
+    if os.path.exists(favicon_path):
+        return FileResponse(favicon_path)
+    return {"status": "No favicon"}
 
 
 @app.post("/generate")

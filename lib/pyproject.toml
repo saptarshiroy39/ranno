@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.3.2"
+version = "0.3.3"
 description = "Instant code generation & execution from prompts."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
 readme = "README.md"
 
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = ["requests", "magika", "pandas"]
 
 [project.urls]

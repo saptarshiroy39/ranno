@@ -1,3 +1,13 @@
+---
+title: Ranno
+emoji: 🦖
+colorFrom: gray
+colorTo: yellow
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/saptarshiroy39/Ranno/main/public/Ranno.svg" alt="🦖" width="128">
   <br>
