@@ -4,7 +4,7 @@ import requests
 from magika import Magika
 import pandas as pd
 
-BASE_URL = "https://ranno.vercel.app"
+BASE_URL = "https://saptarshiroy39-ranno.hf.space"
 m = Magika()
 
 
