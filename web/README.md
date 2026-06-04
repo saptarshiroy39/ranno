@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/saptarshiroy39/Ranno/main/public/Ranno.svg" alt="🦖" width="128">
+  <img src="https://raw.githubusercontent.com/saptarshiroy39/Ranno/refs/heads/main/web/public/Ranno.svg" alt="🦖" width="128">
   <br>
   <b>Ranno</b>
 </h1>
