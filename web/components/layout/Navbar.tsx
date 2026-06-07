@@ -36,8 +36,8 @@ export default function Navbar() {
               height={32}
               className="object-contain"
             />
-            <span className="font-lexend text-2xl font-bold leading-none">
-              Ranno
+            <span className="font-lexend text-xl font-bold leading-none">
+              RANNO
             </span>
           </Link>
 
@@ -49,7 +49,7 @@ export default function Navbar() {
               className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors h-8.5 text-xs sm:text-sm font-semibold cursor-pointer"
             >
               <IconBrandPython className="h-4 w-4 text-primary" />
-              <span>PyPI</span>
+              <span className="hidden sm:inline">PyPI</span>
             </Link>
 
             <Link
@@ -59,7 +59,7 @@ export default function Navbar() {
               className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors h-8.5 text-xs sm:text-sm font-semibold cursor-pointer"
             >
               <IconBrandGithub className="h-4 w-4" />
-              <span>Repository</span>
+              <span className="hidden sm:inline">Repository</span>
             </Link>
 
             <Link
@@ -69,7 +69,7 @@ export default function Navbar() {
               className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors h-8.5 text-xs sm:text-sm font-semibold cursor-pointer"
             >
               <IconAlertCircle className="h-4 w-4 text-blue-500" />
-              <span>Issues</span>
+              <span className="hidden sm:inline">Issues</span>
             </Link>
 
             <button
@@ -78,7 +78,7 @@ export default function Navbar() {
               id="nav-support-trigger"
             >
               <IconHeart className="h-4 w-4 text-rose-500" />
-              <span>Support</span>
+              <span className="hidden sm:inline">Support</span>
             </button>
 
             <AnimatedThemeToggler

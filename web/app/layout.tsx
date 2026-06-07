@@ -21,8 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ranno",
-  description:
-    "Ranno is an ultra-minimalist Python library that turns plain English into secure, executable Python code with shadow-copy rollback protection.",
+  description: "Instant Code Gen & Execution from Prompts",
   icons: {
     icon: "/Ranno.svg",
   },
