@@ -6,6 +6,7 @@ colorTo: yellow
 sdk: docker
 pinned: false
 app_port: 7860
+short_description: Python Library
 ---
 
 <h1 align="center">
