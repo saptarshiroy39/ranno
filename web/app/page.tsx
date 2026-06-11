@@ -5,7 +5,6 @@ import Image from "next/image";
 import { IconCopy, IconCheck } from "@tabler/icons-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Figlet from "@/components/Figlet";
 
 const KEYWORDS = new Set([
   "from",
@@ -81,7 +80,9 @@ function HighlightedCode({ code }: { code: string }) {
   return (
     <div className="font-geist text-sm text-foreground leading-[1.65] whitespace-pre-wrap break-words">
       {code.split("\n").map((line, i) => (
-        <div key={i}>{line === "" ? <br /> : tokenizeLine(line, i)}</div>
+        <div key={i} className={i === 0 ? "pr-12" : ""}>
+          {line === "" ? <br /> : tokenizeLine(line, i)}
+        </div>
       ))}
     </div>
   );
@@ -141,7 +142,6 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans antialiased overflow-hidden transition-colors duration-200">
-      <Figlet />
       <Navbar />
 
       <main className="flex-1 flex flex-col py-6 sm:py-8 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -281,7 +281,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 </div>
               </div>
 
-              <div className="relative bg-muted border border-border rounded-xl p-4 mt-3 h-[280px] flex-shrink-0 overflow-hidden">
+              <div className="relative bg-muted border border-border rounded-xl p-4 mt-3 min-h-[280px] flex-1 flex-shrink-0 overflow-hidden">
                 <HighlightedCode code={apiCodes[apiTab]} />
                 <button
                   onClick={copyApi}
