@@ -162,7 +162,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 <div>
                   <h1 className="text-2xl font-extrabold tracking-tight leading-none text-foreground flex items-center gap-1.5">
                     Ranno SDK{" "}
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-600/10 dark:bg-amber-400/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-600/20 dark:border-amber-400/20">
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-600/10 dark:bg-amber-400/10 text-amber-600 dark:text-amber-400 font-geist font-semibold border border-amber-600/20 dark:border-amber-400/20">
                       v0.3.3
                     </span>
                   </h1>
@@ -196,15 +196,15 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 <li>
                   <strong className="text-foreground">Ultra Minimalist:</strong>{" "}
                   Only 3 robust functions (
-                  <span className="font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
                     gn
                   </span>
                   ,{" "}
-                  <span className="font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
                     ex
                   </span>
                   ,{" "}
-                  <span className="font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
                     cf
                   </span>
                   ) - zero boilerplate.
