@@ -57,6 +57,7 @@
   --input: #e7e5e4;
   --ring: #1c1917;
   --radius: 0.875rem;
+  --spark-color: var(--color-amber-600);
 }
 
 .dark {
@@ -78,6 +79,7 @@
   --border: #292524;
   --input: #292524;
   --ring: #a8a29e;
+  --spark-color: var(--color-amber-400);
 }
 
 @layer base {
