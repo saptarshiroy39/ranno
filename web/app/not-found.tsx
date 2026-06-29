@@ -1,48 +1,33 @@
-import Link from "next/link";
-import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { IconHome } from "@tabler/icons-react";
-import { MorphingText } from "@/components/ui/morphing-text";
-import ClickSpark from "@/components/ui/click-spark";
+"use client";
 
-export const metadata: Metadata = {
-  title: "404 - Page Not Found | Ranno",
-  description:
-    "The requested page could not be found. Please return to Ranno to continue.",
-};
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { MorphingText } from "@/components/ui/morphing-text";
+import { IconBook } from "@tabler/icons-react";
 
 export default function NotFound() {
   return (
-    <ClickSpark
-      sparkColor="var(--spark-color)"
-      sparkSize={10}
-      sparkRadius={15}
-      sparkCount={8}
-      duration={500}
-      easing="ease-out"
-      extraScale={1.2}
-      className="bg-background flex min-h-dvh flex-col items-center justify-center px-4 text-center relative w-full"
+    <main
+      id="main"
+      className="flex flex-col items-center justify-center gap-12 min-h-screen p-4 text-center font-sans bg-background text-foreground"
     >
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-xl py-6">
         <MorphingText
           texts={["404", "Not Found"]}
-          className="text-amber-600 dark:text-amber-400 font-sans font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl h-20 sm:h-28 md:h-36 lg:h-40"
+          className="text-amber-600 dark:text-amber-400 font-sans font-bold"
         />
       </div>
-
-      <div className="mt-16">
-        <Button
-          asChild
-          variant="outline"
-          size="lg"
-          className="font-sans cursor-pointer"
-        >
-          <Link href="/">
-            <IconHome className="mr-2 h-4 w-4" />
-            Return Home
-          </Link>
-        </Button>
-      </div>
-    </ClickSpark>
+      <Button
+        size="lg"
+        variant="outline"
+        className="mt-6 text-lg font-sans cursor-pointer"
+        asChild
+      >
+        <Link href="/">
+          <IconBook className="mr-2 h-5 w-5" />
+          Return to Docs
+        </Link>
+      </Button>
+    </main>
   );
 }
