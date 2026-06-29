@@ -5,7 +5,6 @@ import Image from "next/image";
 import { IconCopy, IconCheck } from "@tabler/icons-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ClickSpark from "@/components/ui/click-spark";
 
 const KEYWORDS = new Set([
   "from",
@@ -142,16 +141,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
   };
 
   return (
-    <ClickSpark
-      sparkColor="var(--spark-color)"
-      sparkSize={10}
-      sparkRadius={15}
-      sparkCount={8}
-      duration={500}
-      easing="ease-out"
-      extraScale={1.2}
-      className="min-h-screen bg-background text-foreground flex flex-col font-sans antialiased overflow-hidden transition-colors duration-200 w-full relative"
-    >
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans antialiased overflow-hidden transition-colors duration-200 w-full relative">
       <Navbar />
 
       <main className="flex-1 flex flex-col py-6 sm:py-8 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -319,6 +309,6 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
       </main>
 
       <Footer />
-    </ClickSpark>
+    </div>
   );
 }

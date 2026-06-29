@@ -4,22 +4,23 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Figlet from "@/components/Figlet";
-
+import ClickSpark from "@/components/ui/click-spark";
+ 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
+ 
 const lexend = Lexend({
   subsets: ["latin"],
   variable: "--font-lexend",
 });
-
+ 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 });
-
+ 
 export const metadata: Metadata = {
   title: "Ranno",
   description: "Instant Code Gen & Execution from Prompts",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     icon: "/Ranno.svg",
   },
 };
-
+ 
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,8 +53,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Figlet />
-          {children}
+          <ClickSpark className="flex min-h-screen w-full flex-col">
+            <Figlet />
+            {children}
+          </ClickSpark>
         </ThemeProvider>
       </body>
     </html>
