@@ -106,7 +106,9 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         if (match) {
           const varName = match[1].trim();
           const fallback = match[2]?.trim();
-          const computed = getComputedStyle(canvas).getPropertyValue(varName).trim();
+          const computed = getComputedStyle(canvas)
+            .getPropertyValue(varName)
+            .trim();
           resolvedColor = computed || fallback || "#d97706";
         }
       }
@@ -176,7 +178,10 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
 
   return (
     <div className={className} onClick={handleClick}>
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-50" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none z-50"
+      />
       {children}
     </div>
   );
