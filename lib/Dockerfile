@@ -15,7 +15,7 @@ RUN useradd -m -u 1000 user
 WORKDIR /home/user/app
 
 COPY pyproject.toml .
-RUN uv pip install --no-cache --system -r pyproject.toml
+RUN uv pip install --no-cache --system fastapi uvicorn google-generativeai python-dotenv -r pyproject.toml
 
 RUN chown -R user:user /home/user/app
 
