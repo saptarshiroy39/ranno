@@ -1,21 +1,43 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.3.3"
+version = "0.4.0"
 description = "Instant code generation & execution from prompts."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
 readme = "README.md"
-
 requires-python = ">=3.8"
 dependencies = ["requests", "magika", "pandas"]
+keywords = ["ai", "code-generation", "execution", "gemini", "sdk", "agent", "safe-execution"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [project.urls]
-Repository = "https://github.com/saptarshiroy39/Ranno"
+Repository = "https://github.com/saptarshiroy39/ranno"
 Homepage = "https://pypi.org/project/ranno"
+Documentation = "https://github.com/saptarshiroy39/ranno#readme"
+"Bug Tracker" = "https://github.com/saptarshiroy39/ranno/issues"
 
 [tool.setuptools]
-packages = ["ranno"]
+package-data = {"ranno" = ["py.typed"]}
+
+[tool.setuptools.packages.find]
+include = ["ranno"]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "RUF"]

@@ -1,7 +1,8 @@
-from pathlib import Path
 import shutil
+import sys
+from pathlib import Path
 
-from ._gn import gn, AIResult
+from ._gn import AIResult, gn
 
 
 def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult:
@@ -10,6 +11,8 @@ def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
     if not code or code.startswith("# Error"):
         return code
 
+    print(code)
+
     backup_path = None
     if data:
         original_path = Path(data)
@@ -17,7 +20,7 @@ def ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIRe
         shutil.copy2(original_path, backup_path)
 
     try:
-        exec(code, globals())
+        exec(code, sys._getframe(1).f_globals)
 
         if backup_path:
             backup_path.unlink(missing_ok=True)

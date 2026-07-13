@@ -1,9 +1,10 @@
 import os
+
+import google.generativeai as genai
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-import google.generativeai as genai
 
 from app.config import APP_NAME, APP_VERSION, CORS_ORIGINS, ENV
 
@@ -58,8 +59,10 @@ async def generate(request: PromptRequest):
         client = genai.GenerativeModel(current_model_name)
 
         prompt = (
-            f"Write the full, complete, and raw Python code for the following request: {request.prompt}. "
-            "IMPORTANT: Do NOT use ellipses (...), do NOT use placeholders, and do NOT skip any lines. "
+            "Write the full, complete, and raw Python code for the following "
+            f"request: {request.prompt}. "
+            "IMPORTANT: Do NOT use ellipses (...), do NOT use placeholders, "
+            "and do NOT skip any lines. "
             "Do NOT use markdown backticks (```). Return ONLY the raw code."
         )
 
@@ -68,4 +71,4 @@ async def generate(request: PromptRequest):
         return {"code": clean_code}
 
     except Exception as e:
-        return {"code": f"# AI Error: {str(e)}"}
+        return {"code": f"# AI Error: {e!s}"}
