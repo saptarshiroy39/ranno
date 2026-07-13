@@ -31,7 +31,7 @@ const KEYWORDS = new Set([
   "except",
   "finally",
 ]);
-const API_FNS = new Set(["gn", "ex", "cf"]);
+const API_FNS = new Set(["gn", "ex", "sv", "cf"]);
 
 function tokenizeLine(line: string, idx: number) {
   if (line.trimStart().startsWith("#")) {
@@ -92,7 +92,7 @@ export default function Home() {
   const [copiedInstall, setCopiedInstall] = useState(false);
   const [installManager, setInstallManager] = useState<"pip" | "uv">("pip");
   const [copiedApi, setCopiedApi] = useState(false);
-  const [apiTab, setApiTab] = useState<"gn" | "ex" | "cf">("gn");
+  const [apiTab, setApiTab] = useState<"gn" | "ex" | "sv" | "cf">("gn");
 
   const installCommands = {
     pip: "pip install ranno",
@@ -103,10 +103,10 @@ export default function Home() {
     gn: `from ranno import gn
 
 # Without Data
-gn("Create a list of 10 dinosaurs")
+print(gn("Create a list of 10 dinosaurs"))
 
 # With Data
-gn("Find the average price", data="data.csv")`,
+print(gn("Find the average price", data="data.csv"))`,
 
     ex: `from ranno import ex
 
@@ -116,13 +116,21 @@ ex("Print hello world 5 times")
 # With Data
 ex("Plot price vs category", data="data.csv")`,
 
+    sv: `from ranno import gn, sv
+
+# Generate code
+code = gn("Download image from URL")
+
+# Save it to a file
+sv(code, name="file.py")`,
+
     cf: `from ranno import cf, gn, ex
 
 # Set custom credentials & model (Gemini only)
 my_cfg = cf(api_key="api_key", model="model_name")
 
 # Run with custom config
-gn("Plot Sine Wave", config=my_cfg)
+print(gn("Plot Sine Wave", config=my_cfg))
 
 # Execute with custom config
 ex("Plot correlation", data="data.csv", config=my_cfg)`,
@@ -163,7 +171,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                   <h1 className="text-2xl font-extrabold tracking-tight leading-none text-foreground flex items-center gap-1.5">
                     Ranno SDK{" "}
                     <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-600/10 dark:bg-amber-400/10 text-amber-600 dark:text-amber-400 font-geist font-semibold border border-amber-600/20 dark:border-amber-400/20">
-                      v0.3.3
+                      v0.4.0
                     </span>
                   </h1>
                   <p className="text-sm text-muted-foreground font-mono mt-1.5 font-semibold">
@@ -195,13 +203,17 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 </li>
                 <li>
                   <strong className="text-foreground">Ultra Minimalist:</strong>{" "}
-                  Only 3 robust functions (
+                  Only 4 robust functions (
                   <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
                     gn
                   </span>
                   ,{" "}
                   <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
                     ex
+                  </span>
+                  ,{" "}
+                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
+                    sv
                   </span>
                   ,{" "}
                   <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
@@ -264,7 +276,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                   Documentation
                 </span>
                 <div className="flex gap-4 text-sm font-semibold text-muted-foreground font-sans">
-                  {(["gn", "ex", "cf"] as const).map((f) => (
+                  {(["gn", "ex", "sv", "cf"] as const).map((f) => (
                     <button
                       key={f}
                       id={`api-btn-${f}`}
@@ -300,6 +312,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 <span>
                   {apiTab === "gn" && "Generate Code (No Execution)"}
                   {apiTab === "ex" && "Execute Code Instantly (Auto-Backup)"}
+                  {apiTab === "sv" && "Save Code to File (Write to Disk)"}
                   {apiTab === "cf" && "Custom Configuration (API & Model)"}
                 </span>
               </div>

@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-pydantic
-python-dotenv
-google-generativeai
-requests
-magika
-pandas
