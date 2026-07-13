@@ -43,10 +43,10 @@ uv add ranno
 from ranno import gn
 
 # Without Data
-gn("Create a list of 10 dinosaurs")
+print(gn("Create a list of 10 dinosaurs"))
 
 # With Data
-gn("Find the average price", data="data.csv")
+print(gn("Find the average price", data="data.csv"))
 ```
 
 `Execute Code Instantly (Auto-Backup)`
@@ -61,6 +61,18 @@ ex("Print hello world 5 times")
 ex("Plot price vs category", data="data.csv")
 ```
 
+`Save Code to File (Write to Disk)`
+
+```python
+from ranno import gn, sv
+
+# Generate code
+code = gn("Download image from URL")
+
+# Save it to a file
+sv(code, name="file.py")
+```
+
 `Custom Configuration (API & Model)`
 
 ```python
@@ -70,7 +82,7 @@ from ranno import cf, gn, ex
 my_cfg = cf(api_key="api_key", model="model_name")
 
 # Run with custom config
-gn("Plot Sine Wave", config=my_cfg)
+print(gn("Plot Sine Wave", config=my_cfg))
 
 # Execute with custom config
 ex("Plot correlation", data="data.csv", config=my_cfg)
@@ -88,7 +100,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)
 | 🧪 **Instant Execution**      | Runs AI-generated Python code directly with automated error handling      |
 | ⚙️ **Custom Configuration**   | Override default API keys and Models per request using `cf()`             |
 | 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure   |
-| 🦖 **Ultra Minimalism**       | Three functions (`gn`, `ex`, `cf`) is all you need - zero boilerplate     |
+| 🦖 **Ultra Minimalism**       | Four functions (`gn`, `ex`, `sv`, `cf`) is all you need - zero boilerplate |
 
 ---
 
