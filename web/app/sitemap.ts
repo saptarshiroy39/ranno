@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 
+const lastModified = new Date();
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://ranno.hirishi.in",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      lastModified,
+      changeFrequency: "weekly",
       priority: 1.0,
     },
   ];
