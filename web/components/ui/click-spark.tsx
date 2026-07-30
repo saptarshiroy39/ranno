@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useCallback } from "react";
+import { cn } from "@/lib/utils";
 
 interface ClickSparkProps {
   sparkColor?: string;
@@ -19,6 +20,7 @@ interface Spark {
   y: number;
   angle: number;
   startTime: number;
+  color: string;
 }
 
 const ClickSpark: React.FC<ClickSparkProps> = ({
@@ -82,7 +84,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
           return t * (2 - t);
       }
     },
-    [easing],
+    [easing]
   );
 
   useEffect(() => {
@@ -97,21 +99,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
       if (!startTimeRef.current) {
         startTimeRef.current = timestamp;
       }
-      ctx?.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Resolve CSS variable color if needed
-      let resolvedColor = sparkColor;
-      if (sparkColor.startsWith("var(")) {
-        const match = sparkColor.match(/var\(([^,)]+)(?:,\s*([^)]+))?\)/);
-        if (match) {
-          const varName = match[1].trim();
-          const fallback = match[2]?.trim();
-          const computed = getComputedStyle(canvas)
-            .getPropertyValue(varName)
-            .trim();
-          resolvedColor = computed || fallback || "#d97706";
-        }
-      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       sparksRef.current = sparksRef.current.filter((spark: Spark) => {
         const elapsed = timestamp - spark.startTime;
@@ -130,7 +118,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
         const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
 
-        ctx.strokeStyle = resolvedColor;
+        ctx.strokeStyle = spark.color;
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(x1, y1);
@@ -148,15 +136,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     return () => {
       cancelAnimationFrame(animationId);
     };
-  }, [
-    sparkColor,
-    sparkSize,
-    sparkRadius,
-    sparkCount,
-    duration,
-    easeFunc,
-    extraScale,
-  ]);
+  }, [sparkSize, sparkRadius, duration, easeFunc, extraScale]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
     const canvas = canvasRef.current;
@@ -165,22 +145,33 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
+    let resolvedColor = sparkColor;
+    if (sparkColor.startsWith("var(")) {
+      const varName = sparkColor.slice(4, -1).trim();
+      resolvedColor =
+        getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    }
+
     const now = performance.now();
     const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
       x,
       y,
       angle: (2 * Math.PI * i) / sparkCount,
       startTime: now,
+      color: resolvedColor,
     }));
 
     sparksRef.current.push(...newSparks);
   };
 
   return (
-    <div className={className} onClick={handleClick}>
+    <div
+      className={cn("relative h-full w-full", className)}
+      onClick={handleClick}
+    >
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none z-50"
+        className="pointer-events-none absolute inset-0 z-[9999]"
       />
       {children}
     </div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { IconCopy, IconCheck } from "@tabler/icons-react";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 const KEYWORDS = new Set([
   "from",
@@ -78,7 +77,7 @@ function tokenizeLine(line: string, idx: number) {
 
 function HighlightedCode({ code }: { code: string }) {
   return (
-    <div className="font-geist text-sm text-foreground leading-[1.65] whitespace-pre-wrap break-words">
+    <div className="font-mono text-sm text-foreground leading-[1.65] whitespace-pre-wrap break-words">
       {code.split("\n").map((line, i) => (
         <div key={i} className={i === 0 ? "pr-12" : ""}>
           {line === "" ? <br /> : tokenizeLine(line, i)}
@@ -102,6 +101,7 @@ export default function Home() {
   const apiCodes = {
     gn: `from ranno import gn
 
+
 # Without Data
 print(gn("Create a list of 10 dinosaurs"))
 
@@ -109,6 +109,7 @@ print(gn("Create a list of 10 dinosaurs"))
 print(gn("Find the average price", data="data.csv"))`,
 
     ex: `from ranno import ex
+
 
 # Without Data
 ex("Print hello world 5 times")
@@ -118,6 +119,7 @@ ex("Plot price vs category", data="data.csv")`,
 
     sv: `from ranno import gn, sv
 
+
 # Generate code
 code = gn("Download image from URL")
 
@@ -125,6 +127,7 @@ code = gn("Download image from URL")
 sv(code, name="file.py")`,
 
     cf: `from ranno import cf, gn, ex
+
 
 # Set custom credentials & model (Gemini only)
 my_cfg = cf(api_key="api_key", model="model_name")
@@ -149,7 +152,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans antialiased overflow-hidden transition-colors duration-200 w-full relative">
+    <div className="min-h-screen bg-muted dark:bg-card text-foreground flex flex-col font-mono antialiased overflow-hidden transition-colors duration-200 w-full relative">
       <Navbar />
 
       <main className="flex-1 flex flex-col py-6 sm:py-8 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
@@ -157,7 +160,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
           <div className="flex flex-col justify-between gap-8 p-1">
             <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <div className="relative h-14 w-14 rounded-xl border border-border bg-muted flex items-center justify-center p-1.5 flex-shrink-0">
+                <div className="relative h-14 w-14 rounded-none border border-border bg-muted dark:bg-card flex items-center justify-center p-1.5 flex-shrink-0">
                   <Image
                     src="/Ranno.svg"
                     alt="Ranno Mascot Logo"
@@ -170,7 +173,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 <div>
                   <h1 className="text-2xl font-extrabold tracking-tight leading-none text-foreground flex items-center gap-1.5">
                     Ranno SDK{" "}
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-600/10 dark:bg-amber-400/10 text-amber-600 dark:text-amber-400 font-geist font-semibold border border-amber-600/20 dark:border-amber-400/20">
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-sidebar-primary/10 text-sidebar-primary font-mono font-semibold border border-sidebar-primary/20">
                       v0.4.0
                     </span>
                   </h1>
@@ -204,19 +207,19 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 <li>
                   <strong className="text-foreground">Ultra Minimalist:</strong>{" "}
                   Only 4 robust functions (
-                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
                     gn
                   </span>
                   ,{" "}
-                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
                     ex
                   </span>
                   ,{" "}
-                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
                     sv
                   </span>
                   ,{" "}
-                  <span className="font-geist font-bold text-amber-600 dark:text-amber-400">
+                  <span className="font-mono font-bold text-amber-600 dark:text-amber-400">
                     cf
                   </span>
                   ) - zero boilerplate.
@@ -224,19 +227,19 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
               </ul>
             </div>
 
-            <div className="border border-border bg-card text-card-foreground rounded-2xl p-6 space-y-4">
+            <div className="border border-border bg-background/80 text-card-foreground rounded-none p-6 space-y-4">
               <div className="flex items-center justify-between border-b border-border pb-3">
                 <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-bold">
                   Install Package
                 </span>
-                <div className="flex gap-4 text-sm font-semibold text-muted-foreground font-sans">
+                <div className="flex gap-4 text-sm font-semibold text-muted-foreground font-mono">
                   {(["pip", "uv"] as const).map((mgr) => (
                     <button
                       key={mgr}
                       onClick={() => setInstallManager(mgr)}
-                      className={`cursor-pointer transition-colors hover:text-foreground relative pb-1 ${
+                      className={`cursor-pointer transition-colors hover:text-sidebar-primary relative pb-1 ${
                         installManager === mgr
-                          ? "text-foreground font-bold border-b-2 border-amber-600 dark:border-amber-400"
+                          ? "text-sidebar-primary font-bold border-b-2 border-sidebar-primary"
                           : ""
                       }`}
                     >
@@ -246,8 +249,8 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 </div>
               </div>
 
-              <div className="relative bg-muted border border-border rounded-xl p-4 mt-3 flex-shrink-0 overflow-hidden min-h-[56px] flex items-center">
-                <div className="font-geist text-sm text-foreground leading-[1.65] whitespace-pre-wrap break-words pr-8">
+              <div className="relative bg-muted dark:bg-card border border-border rounded-none p-4 mt-3 flex-shrink-0 overflow-hidden min-h-[56px] flex items-center">
+                <div className="font-mono text-sm text-foreground leading-[1.65] whitespace-pre-wrap break-words pr-8">
                   <span className="text-stone-400 dark:text-stone-500 italic">
                     $
                   </span>{" "}
@@ -255,7 +258,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 </div>
                 <button
                   onClick={copyInstall}
-                  className="absolute top-3.5 right-3.5 text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-lg border border-border bg-card cursor-pointer"
+                  className="absolute top-3.5 right-3.5 text-muted-foreground hover:text-sidebar-primary hover:border-sidebar-primary/45 transition-colors p-1.5 rounded-none border border-border bg-background cursor-pointer"
                   id="hero-copy-install"
                   title="Copy command"
                 >
@@ -270,20 +273,20 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
           </div>
 
           <div className="flex flex-col justify-between h-full p-1">
-            <div className="border border-border bg-card text-card-foreground rounded-2xl p-6 space-y-4 h-full flex flex-col justify-between">
+            <div className="border border-border bg-background/80 text-card-foreground rounded-none p-6 space-y-4 h-full flex flex-col justify-between">
               <div className="flex items-center justify-between border-b border-border pb-3">
                 <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider font-bold">
                   Documentation
                 </span>
-                <div className="flex gap-4 text-sm font-semibold text-muted-foreground font-sans">
+                <div className="flex gap-4 text-sm font-semibold text-muted-foreground font-mono">
                   {(["gn", "ex", "sv", "cf"] as const).map((f) => (
                     <button
                       key={f}
                       id={`api-btn-${f}`}
                       onClick={() => setApiTab(f)}
-                      className={`cursor-pointer transition-colors hover:text-foreground relative pb-1 ${
+                      className={`cursor-pointer transition-colors hover:text-sidebar-primary relative pb-1 ${
                         apiTab === f
-                          ? "text-foreground font-bold border-b-2 border-amber-600 dark:border-amber-400"
+                          ? "text-sidebar-primary font-bold border-b-2 border-sidebar-primary"
                           : ""
                       }`}
                     >
@@ -293,11 +296,11 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
                 </div>
               </div>
 
-              <div className="relative bg-muted border border-border rounded-xl p-4 mt-3 min-h-[280px] flex-1 flex-shrink-0 overflow-hidden">
+              <div className="relative bg-muted dark:bg-card border border-border rounded-none p-4 mt-3 min-h-[280px] flex-1 flex-shrink-0 overflow-hidden">
                 <HighlightedCode code={apiCodes[apiTab]} />
                 <button
                   onClick={copyApi}
-                  className="absolute top-3.5 right-3.5 text-muted-foreground hover:text-foreground transition-colors p-1.5 rounded-lg border border-border bg-card cursor-pointer"
+                  className="absolute top-3.5 right-3.5 text-muted-foreground hover:text-sidebar-primary hover:border-sidebar-primary/45 transition-colors p-1.5 rounded-none border border-border bg-background cursor-pointer"
                   title="Copy Code"
                 >
                   {copiedApi ? (
@@ -320,8 +323,6 @@ ex("Plot correlation", data="data.csv", config=my_cfg)`,
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

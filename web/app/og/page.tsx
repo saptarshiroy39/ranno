@@ -9,7 +9,7 @@ export default function OG() {
 
   return (
     <>
-      <main className="flex min-h-screen w-full flex-col items-center justify-center gap-8 bg-[#F5F5F4] dark:bg-background text-foreground p-6">
+      <main className="bg-sidebar text-foreground flex min-h-screen w-full flex-col items-center justify-center gap-8 p-6">
         <div className="flex max-w-6xl flex-col items-center justify-center gap-4 text-center">
           <h1 className="mb-2 flex items-center justify-center gap-2 text-2xl leading-none font-bold">
             <Image
@@ -19,14 +19,14 @@ export default function OG() {
               height={64}
               className="object-contain"
             />
-            <span className="font-lexend text-6xl text-foreground">RANNO</span>
+            <span className="font-mono text-6xl text-foreground">RANNO</span>
           </h1>
 
           <h1 className="text-muted-foreground text-2xl font-bold tracking-tight">
             Instant Code Gen &amp; Execution from Prompts
           </h1>
 
-          <h2 className="mb-4 text-3xl font-medium tracking-tight text-foreground">
+          <h2 className="mb-4 text-3xl font-medium tracking-tight text-foreground text-center">
             Code Gen • File Intelligence • Shadow Copy • Ultra Minimalist
           </h2>
 
@@ -35,7 +35,7 @@ export default function OG() {
               <Badge
                 key={item}
                 variant="secondary"
-                className="border-amber-600/30 dark:border-neutral-700 bg-[#FFFBEB] dark:bg-neutral-900/50 p-3 text-lg text-amber-600 dark:text-amber-400 h-auto rounded-full font-medium"
+                className="bg-primary text-primary-foreground p-3 text-lg h-auto rounded-none font-medium border-0"
               >
                 {item}
               </Badge>
@@ -46,7 +46,7 @@ export default function OG() {
               <Badge
                 key={item}
                 variant="secondary"
-                className="border-amber-600/30 dark:border-neutral-700 bg-[#FFFBEB] dark:bg-neutral-900/50 p-3 text-lg text-amber-600 dark:text-amber-400 h-auto rounded-full font-medium"
+                className="bg-primary text-primary-foreground p-3 text-lg h-auto rounded-none font-medium border-0"
               >
                 {item}
               </Badge>
