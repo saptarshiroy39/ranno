@@ -1,20 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Lexend, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Figlet from "@/components/Figlet";
 import ClickSpark from "@/components/ui/click-spark";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const lexend = Lexend({
-  subsets: ["latin"],
-  variable: "--font-lexend",
-});
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -107,22 +97,19 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(
-        "h-full",
-        "font-sans",
-        spaceGrotesk.variable,
-        lexend.variable,
-        geistMono.variable,
-      )}
+      className={cn("h-full font-mono", geistMono.variable)}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-mono antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <ClickSpark className="flex min-h-screen w-full flex-col">
+          <ClickSpark
+            sparkColor="var(--spark-color)"
+            className="relative min-h-screen w-full flex flex-col"
+          >
             <Figlet />
             {children}
           </ClickSpark>

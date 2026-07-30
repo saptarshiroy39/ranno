@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="w-full border-b border-border bg-background text-card-foreground">
+      <header className="w-full border-b border-border bg-muted dark:bg-card text-card-foreground">
         <div className="container mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
@@ -36,7 +36,7 @@ export default function Navbar() {
               height={32}
               className="object-contain"
             />
-            <span className="font-lexend text-xl font-bold leading-none">
+            <span className="font-mono text-xl font-bold leading-none">
               RANNO
             </span>
           </Link>
@@ -48,7 +48,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors h-8.5 text-xs sm:text-sm font-semibold cursor-pointer"
             >
-              <IconBrandPython className="h-4 w-4 text-primary" />
+              <IconBrandPython className="h-4 w-4 text-emerald-500" />
               <span className="hidden sm:inline">PyPI</span>
             </Link>
 
@@ -91,9 +91,9 @@ export default function Navbar() {
       </header>
 
       <Dialog open={isDonateOpen} onOpenChange={setIsDonateOpen}>
-        <DialogContent className="border-border bg-card text-card-foreground max-w-[320px] rounded-xl p-5 flex flex-col gap-0 shadow-none">
+        <DialogContent className="border-border bg-card text-card-foreground max-w-[320px] rounded-none p-5 flex flex-col gap-0 shadow-none">
           <DialogHeader className="space-y-1.5 text-center">
-            <DialogTitle className="text-sm font-bold font-sans">
+            <DialogTitle className="text-sm font-bold font-mono">
               Support
             </DialogTitle>
             <DialogDescription className="text-muted-foreground text-[10px] whitespace-nowrap">
@@ -102,7 +102,7 @@ export default function Navbar() {
           </DialogHeader>
 
           <div className="flex flex-col items-center justify-center mt-5">
-            <div className="relative h-52 w-52 bg-muted border border-border rounded-lg overflow-hidden flex items-center justify-center p-2">
+            <div className="relative h-52 w-52 bg-muted border border-border rounded-none overflow-hidden flex items-center justify-center p-2">
               <Image
                 src="/ranno-qr.png"
                 alt="Donation QR Code"
