@@ -1,12 +1,22 @@
 import os
 
-import google.generativeai as genai
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from openai import OpenAI
 from pydantic import BaseModel
 
-from app.config import APP_NAME, APP_VERSION, CORS_ORIGINS, ENV
+from app.config import (
+    APP_NAME,
+    APP_VERSION,
+    CORS_ORIGINS,
+    ENV,
+    GEMINI_API_KEY,
+    GEMINI_BASE_URL,
+    CHAT_MODEL,
+    SYSTEM_PROMPT,
+    USER_PROMPT,
+)
 
 app = FastAPI(
     title=APP_NAME,
@@ -52,22 +62,34 @@ async def favicon():
 @app.post("/generate")
 async def generate(request: PromptRequest):
     try:
-        current_api_key = request.api_key or os.getenv("GEMINI_API_KEY")
-        current_model_name = request.model or "gemini-3.1-flash-lite"
+        current_api_key = request.api_key or GEMINI_API_KEY
+        current_model_name = request.model or CHAT_MODEL
 
-        genai.configure(api_key=current_api_key)
-        client = genai.GenerativeModel(current_model_name)
-
-        prompt = (
-            "Write the full, complete, and raw Python code for the following "
-            f"request: {request.prompt}. "
-            "IMPORTANT: Do NOT use ellipses (...), do NOT use placeholders, "
-            "and do NOT skip any lines. "
-            "Do NOT use markdown backticks (```). Return ONLY the raw code."
+        client = OpenAI(
+            api_key=current_api_key,
+            base_url=GEMINI_BASE_URL,
         )
 
-        response = client.generate_content(prompt)
-        clean_code = response.text.replace("```python", "").replace("```", "").strip()
+        response = client.chat.completions.create(
+            model=current_model_name,
+            messages=[
+                {
+                    "role": "system",
+                    "content": SYSTEM_PROMPT,
+                },
+                {
+                    "role": "user",
+                    "content": USER_PROMPT.format(prompt=request.prompt),
+                },
+            ],
+        )
+        
+        answer = response.choices[0].message.content
+        clean_code = (
+            answer.replace("```python", "").replace("```", "").strip()
+            if answer
+            else ""
+        )
         return {"code": clean_code}
 
     except Exception as e:
