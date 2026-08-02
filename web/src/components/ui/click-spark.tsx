@@ -84,7 +84,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
           return t * (2 - t);
       }
     },
-    [easing]
+    [easing],
   );
 
   useEffect(() => {
@@ -148,8 +148,9 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     let resolvedColor = sparkColor;
     if (sparkColor.startsWith("var(")) {
       const varName = sparkColor.slice(4, -1).trim();
-      resolvedColor =
-        getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+      resolvedColor = getComputedStyle(document.documentElement)
+        .getPropertyValue(varName)
+        .trim();
     }
 
     const now = performance.now();
