@@ -72,7 +72,7 @@ Override default Gemini credentials or model selections per request.
 
 ```python
 # Configure custom credentials and model
-my_config = cf(api_key="YOUR_GEMINI_API_KEY", model="gemini-1.5-pro")
+my_config = cf(api_key="YOUR_GEMINI_API_KEY", model="gemini-3.1-flash-lite")
 
 # Run generation with custom config
 print(gn("Plot a sine wave", config=my_config))

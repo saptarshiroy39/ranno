@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
     "*.preview.app.github.dev", // Github Codespaces tunnel domains
     "*.tunnels.api.visualstudio.com", // VS Code native port forwarding tunnels
   ],
+  async redirects() {
+    return [
+      {
+        source: "/docs/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

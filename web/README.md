@@ -81,14 +81,14 @@ ex("Plot correlation", data="data.csv", config=my_cfg)
 
 ## ✨ _Features_
 
-| FEATURE                       | DESCRIPTION                                                               |
-| ----------------------------- | ------------------------------------------------------------------------- |
-| 🧠 **AI Code Generation**     | Turns plain English prompts into full, runnable Python scripts            |
-| 📁 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
-| 🔍 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically  |
-| 🧪 **Instant Execution**      | Runs AI-generated Python code directly with automated error handling      |
-| ⚙️ **Custom Configuration**   | Override default API keys and Models per request using `cf()`             |
-| 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure   |
+| FEATURE                       | DESCRIPTION                                                                |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| 🧠 **AI Code Generation**     | Turns plain English prompts into full, runnable Python scripts             |
+| 📁 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions  |
+| 🔍 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically   |
+| 🧪 **Instant Execution**      | Runs AI-generated Python code directly with automated error handling       |
+| ⚙️ **Custom Configuration**   | Override default API keys and Models per request using `cf()`              |
+| 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure    |
 | 🦖 **Ultra Minimalism**       | Four functions (`gn`, `ex`, `sv`, `cf`) is all you need - zero boilerplate |
 
 ---
