@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import Figlet from "@/components/Figlet";
 import ClickSpark from "@/components/ui/click-spark";
+import Figlet from "@/components/Figlet";
 
-const geistMono = Geist_Mono({
+const mono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 });
@@ -47,9 +46,7 @@ export const metadata: Metadata = {
   ],
   robots: "index, follow",
   creator: "Saptarshi Roy",
-  authors: [
-    { name: "Saptarshi Roy", url: "https://hirishi.in" },
-  ],
+  authors: [{ name: "Saptarshi Roy", url: "https://hirishi.in" }],
 
   openGraph: {
     title: "Ranno",
@@ -97,9 +94,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("h-full font-mono", geistMono.variable)}
+      className={`${mono.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground font-mono antialiased">
+      <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
