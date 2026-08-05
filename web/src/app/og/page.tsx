@@ -27,7 +27,7 @@ export default function OG() {
           </h1>
 
           <h2 className="mb-4 text-3xl font-medium tracking-tight text-foreground text-center">
-            Code Gen • File Intelligence • Shadow Copy • Ultra Minimalist
+            Code Gen • File Intelligence • Shadow Copy
           </h2>
 
           <h3 className="flex flex-wrap items-center justify-center gap-2 font-semibold">
