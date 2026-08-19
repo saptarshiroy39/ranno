@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ranno"
-version = "0.4.0"
+version = "0.4.1"
 description = "Instant code generation & execution from prompts."
 authors = [{name = "Saptarshi Roy"}]
 license = "MIT"
@@ -19,14 +19,16 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 [project.urls]
-Repository = "https://github.com/saptarshiroy39/ranno"
-Homepage = "https://pypi.org/project/ranno"
-Documentation = "https://github.com/saptarshiroy39/ranno#readme"
+"Repository" = "https://github.com/saptarshiroy39/ranno"
+"Homepage" = "https://pypi.org/project/ranno"
+"Documentation" = "https://ranno.hirishi.in"
+"Changelog" = "https://github.com/saptarshiroy39/ranno/blob/main/CHANGELOG.md"
 "Bug Tracker" = "https://github.com/saptarshiroy39/ranno/issues"
 
 [tool.setuptools]
