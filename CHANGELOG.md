@@ -5,13 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.4.0] - 2026-06-17
+## [0.4.1] - 2026-07-28
 
 ### Added
-- Added `sv()` helper command to save generated code strings directly to a file.
-- Added package version `__version__` export to `__init__.py`.
+- Added `.python-version` file declaration pinned to Python 3.13.
 
 ### Changed
+- Updated PyPI package classifiers to officially support Python 3.13.
+- Updated Dockerfile base image to `python:3.13-slim`.
+
+## [0.4.0] - 2026-06-17
 - Updated `ex()` execution logic to run code in the caller's global namespace (`sys._getframe(1).f_globals`) rather than internal module globals.
 - Restructured code output: `gn()` is now silent by default, and `ex()` explicitly prints the generated code before running it.
 
