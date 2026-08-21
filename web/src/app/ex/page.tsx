@@ -53,10 +53,10 @@ export default function Page() {
 
       <ApiRenderer signature="ranno.ex(prompt: str, data: Optional[str] = None, config: Optional[dict] = None) -> AIResult" />
 
-      <div className="my-4 overflow-x-auto border border-border">
+      <div className="my-4 overflow-x-auto border border-border bg-card rounded-lg overflow-hidden">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="bg-muted/50 border-b border-border">
+            <tr className="bg-muted/40 border-b border-border">
               <th className="p-3 font-bold text-muted-foreground uppercase">
                 Parameter
               </th>
@@ -72,7 +72,7 @@ export default function Page() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            <tr className="hover:bg-muted/5">
+            <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal font-bold">
                 prompt
               </td>
@@ -86,7 +86,7 @@ export default function Page() {
                 The natural language command.
               </td>
             </tr>
-            <tr className="hover:bg-muted/5">
+            <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal font-bold">
                 data
               </td>
@@ -99,7 +99,7 @@ export default function Page() {
                 Copy rollback.
               </td>
             </tr>
-            <tr className="hover:bg-muted/5">
+            <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal font-bold">
                 config
               </td>
@@ -115,10 +115,10 @@ export default function Page() {
         </table>
       </div>
 
-      <div className="my-4 overflow-x-auto border border-border">
+      <div className="my-4 overflow-x-auto border border-border bg-card rounded-lg overflow-hidden">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="bg-muted/50 border-b border-border">
+            <tr className="bg-muted/40 border-b border-border">
               <th className="p-3 font-bold text-muted-foreground uppercase">
                 Returns
               </th>
@@ -128,7 +128,7 @@ export default function Page() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            <tr className="hover:bg-muted/5">
+            <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal text-sidebar-primary font-bold">
                 AIResult
               </td>
