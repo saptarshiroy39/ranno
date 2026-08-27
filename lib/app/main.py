@@ -6,24 +6,11 @@ from fastapi.responses import FileResponse
 from openai import OpenAI
 from pydantic import BaseModel
 
-from app.config import (
-    APP_NAME,
-    APP_VERSION,
-    CORS_ORIGINS,
-    ENV,
-    GEMINI_API_KEY,
-    GEMINI_BASE_URL,
-    CHAT_MODEL,
-    SYSTEM_PROMPT,
-    USER_PROMPT,
-)
+from app.config import APP_NAME, APP_VERSION, CHAT_MODEL, CORS_ORIGINS, GEMINI_API_KEY, GEMINI_BASE_URL, SYSTEM_PROMPT, USER_PROMPT
 
 app = FastAPI(
     title=APP_NAME,
     version=APP_VERSION,
-    docs_url=None if ENV == "production" else "/docs",
-    redoc_url=None if ENV == "production" else "/redoc",
-    openapi_url=None if ENV == "production" else "/openapi.json",
 )
 
 app.add_middleware(
@@ -42,7 +29,6 @@ class PromptRequest(BaseModel):
 
 
 @app.get("/")
-@app.head("/")  # UptimeRobot
 async def root():
     return {
         "name": APP_NAME,
@@ -59,7 +45,7 @@ async def favicon():
     return {"status": "No favicon"}
 
 
-@app.post("/generate")
+@app.post("/generate", tags=["Code Generation"])
 async def generate(request: PromptRequest):
     try:
         current_api_key = request.api_key or GEMINI_API_KEY
