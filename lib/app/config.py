@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 APP_NAME = "Ranno API"
-APP_VERSION = "0.4.0"
-ENV = os.getenv("ENV", "development")
+APP_VERSION = "0.4.1"
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"

@@ -1,5 +1,5 @@
 ---
-title: Ranno
+title: ranno
 emoji: 🦖
 colorFrom: gray
 colorTo: yellow
