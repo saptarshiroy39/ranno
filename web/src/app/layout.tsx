@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import ClickSpark from "@/components/ui/click-spark";
 import Figlet from "@/components/Figlet";
 
 const mono = Geist_Mono({
@@ -103,13 +102,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClickSpark
-            sparkColor="var(--spark-color)"
-            className="relative min-h-screen w-full flex flex-col"
-          >
+          <div className="relative min-h-screen w-full flex flex-col">
             <Figlet />
             {children}
-          </ClickSpark>
+          </div>
         </ThemeProvider>
       </body>
     </html>
