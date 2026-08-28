@@ -92,8 +92,6 @@ export const docsData: Record<string, DocPage> = {
           "**File Intelligence –** Auto-detects column names, types, and schemas of local CSV, Excel, or JSON files to provide accurate context for code generation.",
           "**Local Data Privacy –** Processes files entirely on your local machine. Only a preview of column headers and the first 5 rows are read locally—your datasets are never uploaded to external servers.",
           "**Shadow Copy Integrity –** Protects your data by creating temporary backups (`copy.<filename>`) during execution, automatically rolling back and restoring the original file if a script fails.",
-          "**Caller Scope Propagation –** Executes scripts directly in the caller's namespace (`sys._getframe(1).f_globals`), allowing generated code to read and modify active workspace variables inline.",
-          "**Gemini Native Integration –** Powered natively by Google Gemini models (defaulting to `gemini-3.1-flash-lite`). Credentials and model configurations can be configured per request using `cf()`.",
           "**Ultra Minimalist API –** Features only 4 simple and robust functions (`gn`, `ex`, `sv`, `cf`) to eliminate boilerplate code.",
         ],
       },

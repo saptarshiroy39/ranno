@@ -69,32 +69,6 @@ export default function Page() {
         </li>
         <li className="leading-relaxed whitespace-pre-wrap">
           <strong className="font-bold text-foreground/80">
-            Caller Scope Propagation –{" "}
-          </strong>
-          Executes scripts directly in the caller&apos;s namespace (
-          <code className="font-mono text-xs font-bold text-sidebar-primary">
-            sys._getframe(1).f_globals
-          </code>
-          ), allowing generated code to read and modify active workspace
-          variables inline.
-        </li>
-        <li className="leading-relaxed whitespace-pre-wrap">
-          <strong className="font-bold text-foreground/80">
-            Gemini Native Integration –{" "}
-          </strong>
-          Powered natively by Google Gemini models (defaulting to{" "}
-          <code className="font-mono text-xs font-bold text-sidebar-primary">
-            gemini-3.1-flash-lite
-          </code>
-          ). Credentials and model configurations can be configured per request
-          using{" "}
-          <code className="font-mono text-xs font-bold text-sidebar-primary">
-            cf()
-          </code>
-          .
-        </li>
-        <li className="leading-relaxed whitespace-pre-wrap">
-          <strong className="font-bold text-foreground/80">
             Ultra Minimalist API –{" "}
           </strong>
           Features only 4 simple and robust functions (
