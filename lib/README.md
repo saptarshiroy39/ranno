@@ -1,5 +1,5 @@
 ---
-title: ranno
+title: Ranno
 emoji: 🦖
 colorFrom: gray
 colorTo: yellow
@@ -20,14 +20,23 @@ short_description: Python Library
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/ranno"><b>🔗 <code>PyPI Package</code></b></a>
-  &nbsp;|&nbsp;
-  🆔 <code>pip install ranno</code> or <code>uv add ranno</code>
+  <a href="https://pypi.org/project/ranno/">
+    <img alt="PyPI Version" src="https://img.shields.io/pypi/v/ranno?color=royalblue">
+  </a>
+  <a href="https://github.com/saptarshiroy39/ranno/releases">
+    <img alt="GitHub Release" src="https://img.shields.io/github/v/release/saptarshiroy39/ranno?color=emerald">
+  </a>
+  <a href="https://pepy.tech/project/ranno">
+    <img alt="PyPI Downloads" src="https://img.shields.io/pepy/dt/ranno?color=goldenrod">
+  </a>
+  <a href="https://github.com/saptarshiroy39/ranno/blob/main/LICENSE">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/saptarshiroy39/ranno?color=crimson">
+  </a>
 </p>
 
 ---
 
-## 🐍 _SDK_
+## ✳️ _SDK_
 
 `Installation`
 
@@ -90,26 +99,27 @@ ex("Plot correlation", data="data.csv", config=my_cfg)
 
 ---
 
-## ✨ _Features_
+## ✳️ _Features_
 
-| FEATURE                       | DESCRIPTION                                                               |
-| ----------------------------- | ------------------------------------------------------------------------- |
-| 🧠 **AI Code Generation**     | Turns plain English prompts into full, runnable Python scripts            |
-| 📁 **AI File Intelligence**   | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
-| 🔍 **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically  |
-| 🧪 **Instant Execution**      | Runs AI-generated Python code directly with automated error handling      |
-| ⚙️ **Custom Configuration**   | Override default API keys and Models per request using `cf()`             |
-| 🛡️ **Shadow Copy Integrity**  | Creates a hidden `copy.` snapshot before execution; restores on failure   |
-| 🦖 **Ultra Minimalism**       | Four functions (`gn`, `ex`, `sv`, `cf`) is all you need - zero boilerplate |
+| FEATURE | DESCRIPTION |
+| :---: | :---: |
+| **AI Code Generation** | Turns plain English prompts into full, runnable Python scripts |
+| **AI File Intelligence** | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
+| **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically |
+| **Instant Execution** | Runs AI-generated Python code directly with automated error handling |
+| **Custom Configuration** | Override default API keys and Models per request using `cf()` |
+| **Shadow Copy Integrity** | Creates a hidden `copy.` snapshot before execution; restores on failure |
+| **Ultra Minimalism** | Four functions (`gn`, `ex`, `sv`, `cf`) is all you need - zero boilerplate |
 
 ---
 
-## 🏗️ _System Architecture_
+## ✳️ _Architecture_
 
-| #   | COMPONENT     | DESCRIPTION                                            | STACK                                     |
-| --- | ------------- | ------------------------------------------------------ | ----------------------------------------- |
-| 1️⃣  | **Ranno SDK** | The client-side library handling data prep & execution | **_Python_**, **_Magika_**, **_Pandas_**  |
-| 2️⃣  | **Ranno API** | Serverless backend for secure code generation          | **_FastAPI_**, **_Vercel_**, **_Gemini_** |
+| # | COMPONENT | DESCRIPTION | STACK |
+| :---: | :---: | :---: | :---: |
+| 1️⃣ | **Ranno SDK** | The client-side library handling data prep & execution | **_Python_**, **_Magika_**, **_Pandas_** |
+| 2️⃣ | **Ranno API** | Backend service for secure code generation | **_FastAPI_**, **_Hugging Face_**, **_Gemini_** |
+| 3️⃣ | **Ranno Docs** | Official documentation & web interface | **_Next.js_**, **_Tailwind_**, **_Vercel_** |
 
 ---
 
