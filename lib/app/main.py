@@ -3,10 +3,11 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from openai import OpenAI
-from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 
-from app.config import APP_NAME, APP_VERSION, CHAT_MODEL, CORS_ORIGINS, GEMINI_API_KEY, GEMINI_BASE_URL, SYSTEM_PROMPT, USER_PROMPT
+from app.config import APP_NAME, APP_VERSION, CORS_ORIGINS
+from app.routes.explain import router as explain_router
+from app.routes.generate import router as generate_router
 
 app = FastAPI(
     title=APP_NAME,
@@ -21,62 +22,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-class PromptRequest(BaseModel):
-    prompt: str
-    api_key: str | None = None
-    model: str | None = None
-
-
 @app.get("/")
 async def root():
     return {
         "name": APP_NAME,
         "version": APP_VERSION,
-        "status": "OK"
+        "status": "OK",
     }
 
+app.include_router(generate_router)
+app.include_router(explain_router)
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
-    favicon_path = os.path.join("app", "static", "favicon.ico")
-    if os.path.exists(favicon_path):
-        return FileResponse(favicon_path)
-    return {"status": "No favicon"}
-
-
-@app.post("/generate", tags=["Code Generation"])
-async def generate(request: PromptRequest):
-    try:
-        current_api_key = request.api_key or GEMINI_API_KEY
-        current_model_name = request.model or CHAT_MODEL
-
-        client = OpenAI(
-            api_key=current_api_key,
-            base_url=GEMINI_BASE_URL,
-        )
-
-        response = client.chat.completions.create(
-            model=current_model_name,
-            messages=[
-                {
-                    "role": "system",
-                    "content": SYSTEM_PROMPT,
-                },
-                {
-                    "role": "user",
-                    "content": USER_PROMPT.format(prompt=request.prompt),
-                },
-            ],
-        )
-        
-        answer = response.choices[0].message.content
-        clean_code = (
-            answer.replace("```python", "").replace("```", "").strip()
-            if answer
-            else ""
-        )
-        return {"code": clean_code}
-
-    except Exception as e:
-        return {"code": f"# AI Error: {e!s}"}
+    return FileResponse(os.path.join("app", "static", "favicon.ico"))
