@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-08-13
+
+### Added
+- Added `xp()` helper function to explain Python code and script files.
+- Added `/explain` API route and explanation service.
+- Added external `.md` prompt templates directory (`lib/app/prompts/`) for backend system and user prompts (`SYSTEM.md`, `EXPLAIN.md`, `USER.md`, `EXPLAIN_USER.md`).
+- Added missing `/xp` documentation route layout wrapper (`layout.tsx`).
+
+### Changed
+- Modularized FastAPI backend into routes (`/generate`, `/explain`), service layers, and external prompt markdown templates.
+- Standardized function order (`gn` ➔ `ex` ➔ `xp` ➔ `sv` ➔ `cf`) across all documentation pages, navigation items, search indexing, and README files.
+- Standardized SDK documentation in `SDK.md` with detailed API signatures, parameter tables, and usage examples.
+- Enhanced Python code block tokenizer in documentation site with inline comment support (`#[^\n]*`) and clean empty line rendering.
+- Standardized null-safety handling (`or ""`) across backend code generation and explanation services.
+
 ## [0.4.1] - 2026-07-28
 
 ### Added
