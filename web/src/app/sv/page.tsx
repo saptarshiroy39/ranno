@@ -114,10 +114,10 @@ export default function Page() {
         title="sv() - API"
         code={`from ranno import gn, sv
 
-# 1. Generate code silently
+# Generate code silently
 code = gn("Download image from URL")
 
-# 2. Save it to a file
+# Save it to a file
 sv(code, name="file.py")`}
       />
     </article>

@@ -1,82 +1,231 @@
 # ranno SDK Reference
 
-This reference guide demonstrates how to use `ranno` to generate code, execute prompts with rollback protection, save scripts, and configure credentials.
+This reference guide demonstrates how to use `ranno` to generate code, execute prompts with rollback protection, explain scripts, save code, and configure credentials.
 
 ## Imports
 
-Import the core functions from the package:
-
 ```python
-from ranno import gn, ex, sv, cf
+from ranno import gn, ex, xp, sv, cf
 ```
 
 ---
 
-## Code Generation (`gn`)
+## `gn` - Code Generation
 
-Generate Python code from plain-text prompts. By default, `gn()` is silent and returns the generated code string (`AIResult`).
+- **Silent Code Generation –** Translates plain English prompts into runnable Python code without executing it. Returns an `AIResult` string subclass that suppresses automatic prints in interactive environments.
+- **File Auto-Detection –** Scans local files (CSV, Excel, JSON) using `magika` and `pandas` to extract column schemas and preview rows automatically into the AI context.
+
+### API Signature
 
 ```python
+ranno.gn(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult
+```
+
+### Parameter Reference
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `prompt` | `str` | Yes | Natural language instruction describing the desired code output. |
+| `data` | `str \| None` | No | File path to target CSV, Excel, or JSON dataset. Reads columns and preview rows automatically. |
+| `config` | `dict \| None` | No | Optional configuration dictionary from `cf()` to override API credentials or models. |
+
+### `gn` API - Basic Usage
+
+```python
+from ranno import gn
+
 # Generate code silently
 code = gn("Create a list of 10 dinosaurs")
 print(code)
+```
+
+### `gn` API - Dataset Context
+
+```python
+from ranno import gn
 
 # Generate code with dataset context
-# Reads columns and preview rows automatically
+# Automatically reads column structures and preview rows
 dataset_code = gn("Find the average salary", data="employees.csv")
 print(dataset_code)
 ```
 
-> [!NOTE]
-> `gn()` reads supported files (CSV, Excel, JSON) using `magika` and `pandas` to append column structures and row previews into the AI context.
+### `gn` API - Custom Configuration
+
+```python
+from ranno import gn, cf
+
+# Pass custom credentials or model selections
+my_config = cf(api_key="api_key", model="model_name")
+custom_code = gn("Plot a sine wave", config=my_config)
+print(custom_code)
+```
 
 ---
 
-## Direct Execution (`ex`)
+## `ex` - Direct Execution
 
-Execute AI-generated Python code directly on your system. `ex()` prints the generated script to the console before running it.
+- **Scope Propagation –** Executes generated Python code directly within the caller's global namespace (`sys._getframe(1).f_globals`), allowing it to read, write, and modify local variables inline.
+- **Shadow Copy Integrity –** Protects local files when the `data` parameter is supplied by creating a temporary `copy.<filename>` backup, automatically replacing and restoring the original file if execution fails.
+
+### API Signature
 
 ```python
-# Execute prompt instantly
-ex("print('Hello from Ranno execution context')")
+ranno.ex(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult
+```
 
-# Execute tasks with dataset context
+### Parameter Reference
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `prompt` | `str` | Yes | Natural language command to generate and execute. |
+| `data` | `str \| None` | No | Target dataset file path (`.csv`, `.xlsx`, `.json`). Enables automatic Shadow Copy rollback. |
+| `config` | `dict \| None` | No | Optional configuration dictionary from `cf()`. |
+
+### `ex` API - Instant Execution
+
+```python
+from ranno import ex
+
+# Execute prompt instantly in local scope
+ex("print('Hello from Ranno execution context')")
+```
+
+### `ex` API - Dataset Context & Shadow Copy
+
+```python
+from ranno import ex
+
+# Execute tasks with dataset context and automatic rollback protection
 ex("Plot salary vs department", data="employees.csv")
 ```
 
-> [!IMPORTANT]
-> **Shadow Copy Integrity**: When running `ex()` with a dataset path, `ranno` creates a hidden backup copy (`copy.<filename>`) in the same directory. If the executed script fails, the original dataset is automatically restored to its original state.
+### `ex` API - Custom Configuration
 
-> [!TIP]
-> **Caller Scope Propagation**: Code executed via `ex()` runs directly inside the caller's global namespace (`sys._getframe(1).f_globals`). This allows generated code to read variables from your session and write new variables back into your active workspace.
+```python
+from ranno import ex, cf
+
+# Execute with custom model configuration
+my_config = cf(api_key="api_key", model="model_name")
+ex("Plot correlation heatmap", data="data.csv", config=my_config)
+```
 
 ---
 
-## Saving Code to File (`sv`)
+## `xp` - Code Explanation
 
-Save a generated code string directly to a Python file in your current working directory.
+- **Code & Script Explanation –** Analyzes Python prompts or local `.py` script files and generates step-by-step markdown explanations.
+- **File Intelligence –** Automatically reads and explains `.py` script files when passed to the `data` parameter.
+
+### API Signature
 
 ```python
-# 1. Generate code silently
+ranno.xp(prompt: str, data: str | None = None, config: dict | None = None) -> AIResult
+```
+
+### Parameter Reference
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `prompt` | `str` | Yes | Natural language instruction or prompt description to explain. |
+| `data` | `str \| None` | No | File path to target `.py` script file. Reads file contents automatically. |
+| `config` | `dict \| None` | No | Optional configuration dictionary from `cf()`. |
+
+### `xp` API - Explain Prompt
+
+```python
+from ranno import xp
+
+# Explain prompt directly
+explanation = xp("Explain how quicksort works in Python")
+print(explanation)
+```
+
+### `xp` API - Explain Python Script File
+
+```python
+from ranno import xp
+
+# Explain a local Python script file
+file_explanation = xp("Explain this code", data="script.py")
+print(file_explanation)
+```
+
+### `xp` API - Custom Configuration
+
+```python
+from ranno import xp, cf
+
+# Explain code using custom configuration
+my_config = cf(api_key="api_key", model="model_name")
+explanation = xp("Explain decorators", config=my_config)
+print(explanation)
+```
+
+---
+
+## `sv` - Saving Code to File
+
+- **File Persistence –** Writes a generated code string directly to a local file path in your current working directory.
+
+### API Signature
+
+```python
+ranno.sv(code: str, name: str) -> None
+```
+
+### Parameter Reference
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `code` | `str` | Yes | The Python code string to save. |
+| `name` | `str` | Yes | The target file path name (e.g. `file.py`). |
+
+### `sv` API - Basic Usage
+
+```python
+from ranno import gn, sv
+
+# Generate code silently
 code = gn("Download image from URL")
 
-# 2. Save it to a file
+# Save it to a file
 sv(code, name="file.py")
 ```
 
 ---
 
-## Custom Configuration (`cf`)
+## `cf` - Custom Configuration
 
-Override default Gemini credentials or model selections per request.
+- **Request Configuration –** Generates a custom configuration dictionary containing your API key and model key to override default settings per request.
+
+### API Signature
 
 ```python
+ranno.cf(api_key: str, model: str) -> dict
+```
+
+### Parameter Reference
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `api_key` | `str` | Yes | Provider API key. |
+| `model` | `str` | Yes | Target model identifier key. |
+
+### `cf` API - Basic Usage
+
+```python
+from ranno import gn, ex, xp, cf
+
 # Configure custom credentials and model
-my_config = cf(api_key="YOUR_GEMINI_API_KEY", model="gemini-3.1-flash-lite")
+my_config = cf(api_key="api_key", model="model_name")
 
 # Run generation with custom config
 print(gn("Plot a sine wave", config=my_config))
 
 # Run execution with custom config
 ex("Plot correlation heatmap", data="data.csv", config=my_config)
+
+# Run explanation with custom config
+print(xp("Explain decorators", config=my_config))
 ```
