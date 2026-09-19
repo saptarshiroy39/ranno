@@ -120,16 +120,19 @@ export default function Page() {
       <CodeBlockRenderer
         language="python"
         title="cf() - API"
-        code={`from ranno import gn, ex, cf
+        code={`from ranno import gn, ex, xp, cf
 
 # Configure custom credentials and model
-my_config = cf(api_key="YOUR_GEMINI_API_KEY", model="gemini-3.1-flash-lite")
+my_config = cf(api_key="api_key", model="model_name")
 
 # Run generation with custom config
 print(gn("Plot a sine wave", config=my_config))
 
 # Run execution with custom config
-ex("Plot correlation heatmap", data="data.csv", config=my_config)`}
+ex("Plot correlation heatmap", data="data.csv", config=my_config)
+
+# Run explanation with custom config
+print(xp("Explain decorators", config=my_config))`}
       />
     </article>
   );

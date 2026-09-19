@@ -145,7 +145,7 @@ export default function Page() {
       <CodeBlockRenderer
         language="python"
         title="gn() - API"
-        code={`from ranno import gn
+        code={`from ranno import gn, cf
 
 # Generate code silently
 code = gn("Create a list of 10 dinosaurs")
@@ -153,7 +153,11 @@ print(code)
 
 # Generate code with dataset context
 dataset_code = gn("Find the average salary", data="employees.csv")
-print(dataset_code)`}
+print(dataset_code)
+
+# Generate code with custom configuration
+my_config = cf(api_key="api_key", model="model_name")
+print(gn("Plot a sine wave", config=my_config))`}
       />
     </article>
   );

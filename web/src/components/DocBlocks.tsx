@@ -57,7 +57,7 @@ const KEYWORDS = new Set([
   "except",
   "finally",
 ]);
-const API_FNS = new Set(["gn", "ex", "sv", "cf"]);
+const API_FNS = new Set(["gn", "ex", "xp", "sv", "cf"]);
 const TYPES = new Set([
   "str",
   "dict",
@@ -78,13 +78,19 @@ function tokenizePythonLine(line: string, lineIdx: number) {
     );
   }
   const pattern =
-    /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|[a-zA-Z_][a-zA-Z0-9_]*|[^a-zA-Z_"']+/g;
+    /#[^\n]*|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|[a-zA-Z_][a-zA-Z0-9_]*|[^a-zA-Z_"'#]+/g;
   const nodes: React.ReactNode[] = [];
   let m: RegExpExecArray | null;
   let i = 0;
   while ((m = pattern.exec(line)) !== null) {
     const t = m[0];
-    if (t.startsWith('"') || t.startsWith("'")) {
+    if (t.startsWith("#")) {
+      nodes.push(
+        <span key={i++} className="italic font-normal text-muted-foreground">
+          {t}
+        </span>,
+      );
+    } else if (t.startsWith('"') || t.startsWith("'")) {
       nodes.push(
         <span key={i++} className="text-amber-600 dark:text-amber-400">
           {t}
@@ -137,7 +143,7 @@ export function CodeBlockRenderer({
     if (isPython) {
       return (
         <span key={idx}>
-          {line === "" ? <br /> : tokenizePythonLine(line, idx)}
+          {line === "" ? null : tokenizePythonLine(line, idx)}
           {"\n"}
         </span>
       );
