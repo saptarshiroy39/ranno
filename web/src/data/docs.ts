@@ -64,6 +64,7 @@ export const navigationItems = [
     items: [
       { title: "gn() - Generation", href: "/gn" },
       { title: "ex() - Execution", href: "/ex" },
+      { title: "xp() - Explanation", href: "/xp" },
       { title: "sv() - Saving Code", href: "/sv" },
       { title: "cf() - Configuration", href: "/cf" },
     ],
@@ -89,10 +90,10 @@ export const docsData: Record<string, DocPage> = {
         type: "list",
         items: [
           "**AI Code Gen –** Generates runnable Python code from natural language prompts using `gn()` (silent code generation) or `ex()` (direct execution).",
+          "**Code Explanation –** Explains Python prompts or `.py` script files step-by-step using `xp()`.",
           "**File Intelligence –** Auto-detects column names, types, and schemas of local CSV, Excel, or JSON files to provide accurate context for code generation.",
-          "**Local Data Privacy –** Processes files entirely on your local machine. Only a preview of column headers and the first 5 rows are read locally—your datasets are never uploaded to external servers.",
-          "**Shadow Copy Integrity –** Protects your data by creating temporary backups (`copy.<filename>`) during execution, automatically rolling back and restoring the original file if a script fails.",
-          "**Ultra Minimalist API –** Features only 4 simple and robust functions (`gn`, `ex`, `sv`, `cf`) to eliminate boilerplate code.",
+          "**Data Privacy & Shadow Copy –** Processes files entirely on your local machine with column headers and row previews only—never uploading full datasets—and creates temporary backups (`copy.<filename>`) during execution to automatically roll back and restore original files if a script fails.",
+          "**Ultra Minimalist API –** Features only 5 simple and robust functions (`gn`, `ex`, `xp`, `sv`, `cf`) to eliminate boilerplate code.",
         ],
       },
     ],
@@ -180,7 +181,7 @@ export const docsData: Record<string, DocPage> = {
         type: "code",
         language: "python",
         title: "gn() - API",
-        code: 'from ranno import gn\n\n# Generate code silently\ncode = gn("Create a list of 10 dinosaurs")\nprint(code)\n\n# Generate code with dataset context\ndataset_code = gn("Find the average salary", data="employees.csv")\nprint(dataset_code)',
+        code: 'from ranno import gn, cf\n\n# Generate code silently\ncode = gn("Create a list of 10 dinosaurs")\nprint(code)\n\n# Generate code with dataset context\ndataset_code = gn("Find the average salary", data="employees.csv")\nprint(dataset_code)\n\n# Generate code with custom configuration\nmy_config = cf(api_key="api_key", model="model_name")\nprint(gn("Plot a sine wave", config=my_config))',
       },
     ],
   },
@@ -231,7 +232,57 @@ export const docsData: Record<string, DocPage> = {
         type: "code",
         language: "python",
         title: "ex() - API",
-        code: 'from ranno import ex\n\n# Execute prompt instantly\nex("print(\'Hello from Ranno execution context\')")\n\n# Execute tasks with dataset context\nex("Plot salary vs department", data="employees.csv")',
+        code: 'from ranno import ex, cf\n\n# Execute prompt instantly\nex("print(\'Hello from Ranno execution context\')")\n\n# Execute tasks with dataset context\nex("Plot salary vs department", data="employees.csv")\n\n# Execute with custom configuration\nmy_config = cf(api_key="api_key", model="model_name")\nex("Plot correlation heatmap", data="data.csv", config=my_config)',
+      },
+    ],
+  },
+  xp: {
+    title: "xp() - Code Explanation",
+    blocks: [
+      {
+        type: "list",
+        items: [
+          "**Code & Script Explanation –** Analyzes Python prompts or `.py` script files and generates step-by-step markdown explanations.",
+        ],
+      },
+      {
+        type: "api",
+        name: "xp",
+        signature:
+          "ranno.xp(prompt: str, data: Optional[str] = None, config: Optional[dict] = None) -> AIResult",
+        description:
+          "Explains Python code or script files in clear step-by-step markdown format.",
+        parameters: [
+          {
+            name: "prompt",
+            type: "str",
+            required: true,
+            description: "The natural language instruction or code description.",
+          },
+          {
+            name: "data",
+            type: "str",
+            required: false,
+            description:
+              "File path to target .py script file. Reads script contents automatically.",
+          },
+          {
+            name: "config",
+            type: "dict",
+            required: false,
+            description: "Optional configuration overrides.",
+          },
+        ],
+        returns: {
+          type: "AIResult",
+          description: "Subclass of string containing the explanation.",
+        },
+      },
+      {
+        type: "code",
+        language: "python",
+        title: "xp() - API",
+        code: 'from ranno import xp, cf\n\n# Explain prompt directly\nexplanation = xp("Explain how quicksort works in Python")\nprint(explanation)\n\n# Explain a local Python script file\nfile_explanation = xp("Explain this script", data="script.py")\nprint(file_explanation)\n\n# Explain with custom configuration\nmy_config = cf(api_key="api_key", model="model_name")\nxp("Explain decorators", config=my_config)',
       },
     ],
   },
@@ -269,7 +320,7 @@ export const docsData: Record<string, DocPage> = {
         type: "code",
         language: "python",
         title: "sv() - API",
-        code: 'from ranno import gn, sv\n\n# 1. Generate code silently\ncode = gn("Download image from URL")\n\n# 2. Save it to a file\nsv(code, name="file.py")',
+        code: 'from ranno import gn, sv\n\n# Generate code silently\ncode = gn("Download image from URL")\n\n# Save it to a file\nsv(code, name="file.py")',
       },
     ],
   },
@@ -310,7 +361,7 @@ export const docsData: Record<string, DocPage> = {
         type: "code",
         language: "python",
         title: "cf() - API",
-        code: 'from ranno import gn, ex, cf\n\n# Configure custom credentials and model\nmy_config = cf(api_key="YOUR_GEMINI_API_KEY", model="gemini-3.1-flash-lite")\n\n# Run generation with custom config\nprint(gn("Plot a sine wave", config=my_config))\n\n# Run execution with custom config\nex("Plot correlation heatmap", data="data.csv", config=my_config)',
+        code: 'from ranno import gn, ex, xp, cf\n\n# Configure custom credentials and model\nmy_config = cf(api_key="api_key", model="model_name")\n\n# Run generation with custom config\nprint(gn("Plot a sine wave", config=my_config))\n\n# Run execution with custom config\nex("Plot correlation heatmap", data="data.csv", config=my_config)\n\n# Run explanation with custom config\nprint(xp("Explain decorators", config=my_config))',
       },
     ],
   },

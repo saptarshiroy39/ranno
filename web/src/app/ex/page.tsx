@@ -143,13 +143,17 @@ export default function Page() {
       <CodeBlockRenderer
         language="python"
         title="ex() - API"
-        code={`from ranno import ex
+        code={`from ranno import ex, cf
 
 # Execute prompt instantly
 ex("print('Hello from Ranno execution context')")
 
 # Execute tasks with dataset context
-ex("Plot salary vs department", data="employees.csv")`}
+ex("Plot salary vs department", data="employees.csv")
+
+# Execute with custom configuration
+my_config = cf(api_key="api_key", model="model_name")
+ex("Plot correlation heatmap", data="data.csv", config=my_config)`}
       />
     </article>
   );

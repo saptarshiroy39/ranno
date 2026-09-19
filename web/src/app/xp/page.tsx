@@ -12,11 +12,11 @@ export default function Page() {
           Docs
         </Link>
         <span>&gt;</span>
-        <span className="text-foreground font-medium">cf</span>
+        <span className="text-foreground font-medium">xp</span>
       </nav>
 
       <h1 className="text-2xl font-bold tracking-tight text-foreground">
-        cf() - Custom Configuration
+        xp() - Code Explanation
       </h1>
 
       <div className="h-px bg-border" />
@@ -24,22 +24,17 @@ export default function Page() {
       <ul className="my-4 list-disc pl-6 text-sm text-muted-foreground space-y-6">
         <li className="leading-relaxed whitespace-pre-wrap">
           <strong className="font-bold text-foreground/80">
-            Request Configuration –{" "}
+            Code & Script Explanation –{" "}
           </strong>
-          Generates a custom configuration dictionary containing your API key
-          and model key to override defaults when passed to{" "}
+          Explains Python prompts or local{" "}
           <code className="font-mono text-xs font-bold text-sidebar-primary">
-            gn()
+            .py
           </code>{" "}
-          or{" "}
-          <code className="font-mono text-xs font-bold text-sidebar-primary">
-            ex()
-          </code>
-          .
+          script files in clear, step-by-step markdown overview sections.
         </li>
       </ul>
 
-      <ApiRenderer signature="ranno.cf(api_key: str, model: str) -> dict" />
+      <ApiRenderer signature="ranno.xp(prompt: str, data: Optional[str] = None, config: Optional[dict] = None) -> AIResult" />
 
       <div className="my-4 overflow-x-auto border border-border bg-card rounded-lg overflow-hidden">
         <table className="w-full text-left border-collapse text-xs">
@@ -62,7 +57,7 @@ export default function Page() {
           <tbody className="divide-y divide-border">
             <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal font-bold">
-                api_key
+                prompt
               </td>
               <td className="p-3 text-foreground/80 leading-normal text-sidebar-primary font-bold">
                 str
@@ -71,21 +66,35 @@ export default function Page() {
                 Yes
               </td>
               <td className="p-3 text-foreground/80 leading-normal">
-                Provider API key.
+                The natural language request or code instruction.
               </td>
             </tr>
             <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal font-bold">
-                model
+                data
               </td>
               <td className="p-3 text-foreground/80 leading-normal text-sidebar-primary font-bold">
                 str
               </td>
               <td className="p-3 text-foreground/80 leading-normal font-bold">
-                Yes
+                No
               </td>
               <td className="p-3 text-foreground/80 leading-normal">
-                Target model key.
+                File path to target target Python script (.py). Reads file contents automatically.
+              </td>
+            </tr>
+            <tr className="hover:bg-muted/20 transition-colors">
+              <td className="p-3 text-foreground/80 leading-normal font-bold">
+                config
+              </td>
+              <td className="p-3 text-foreground/80 leading-normal text-sidebar-primary font-bold">
+                dict
+              </td>
+              <td className="p-3 text-foreground/80 leading-normal font-bold">
+                No
+              </td>
+              <td className="p-3 text-foreground/80 leading-normal">
+                Optional configuration overrides.
               </td>
             </tr>
           </tbody>
@@ -107,10 +116,10 @@ export default function Page() {
           <tbody className="divide-y divide-border">
             <tr className="hover:bg-muted/20 transition-colors">
               <td className="p-3 text-foreground/80 leading-normal text-sidebar-primary font-bold">
-                dict
+                AIResult
               </td>
               <td className="p-3 text-foreground/80 leading-normal">
-                A dictionary with configuration keys.
+                Subclass of string containing the step-by-step markdown explanation.
               </td>
             </tr>
           </tbody>
@@ -119,20 +128,20 @@ export default function Page() {
 
       <CodeBlockRenderer
         language="python"
-        title="cf() - API"
-        code={`from ranno import gn, ex, xp, cf
+        title="xp() - API"
+        code={`from ranno import xp, cf
 
-# Configure custom credentials and model
+# Explain prompt directly
+explanation = xp("Explain how a quicksort algorithm works in Python")
+print(explanation)
+
+# Explain a local Python script file
+file_explanation = xp("Explain this code", data="script.py")
+print(file_explanation)
+
+# Explain with custom configuration
 my_config = cf(api_key="api_key", model="model_name")
-
-# Run generation with custom config
-print(gn("Plot a sine wave", config=my_config))
-
-# Run execution with custom config
-ex("Plot correlation heatmap", data="data.csv", config=my_config)
-
-# Run explanation with custom config
-print(xp("Explain decorators", config=my_config))`}
+xp("Explain decorators", config=my_config)`}
       />
     </article>
   );

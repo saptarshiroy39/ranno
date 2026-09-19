@@ -43,6 +43,20 @@ export default function Page() {
         </li>
         <li className="leading-relaxed whitespace-pre-wrap">
           <strong className="font-bold text-foreground/80">
+            Code Explanation –{" "}
+          </strong>
+          Explains Python prompts or{" "}
+          <code className="font-mono text-xs font-bold text-sidebar-primary">
+            .py
+          </code>{" "}
+          script files step-by-step using{" "}
+          <code className="font-mono text-xs font-bold text-sidebar-primary">
+            xp()
+          </code>
+          .
+        </li>
+        <li className="leading-relaxed whitespace-pre-wrap">
+          <strong className="font-bold text-foreground/80">
             File Intelligence –{" "}
           </strong>
           Auto-detects column names, types, and schemas of local CSV, Excel, or
@@ -50,34 +64,32 @@ export default function Page() {
         </li>
         <li className="leading-relaxed whitespace-pre-wrap">
           <strong className="font-bold text-foreground/80">
-            Local Data Privacy –{" "}
+            Data Privacy &amp; Shadow Copy –{" "}
           </strong>
-          Processes files entirely on your local machine. Only a preview of
-          column headers and the first 5 rows are read locally—your datasets are
-          never uploaded to external servers.
-        </li>
-        <li className="leading-relaxed whitespace-pre-wrap">
-          <strong className="font-bold text-foreground/80">
-            Shadow Copy Integrity –{" "}
-          </strong>
-          Protects your data by creating temporary backups (
+          Processes files entirely on your local machine with column headers and
+          row previews only—never uploading full datasets—and creates temporary
+          backups (
           <code className="font-mono text-xs font-bold text-sidebar-primary">
             copy.&lt;filename&gt;
           </code>
-          ) during execution, automatically rolling back and restoring the
-          original file if a script fails.
+          ) during execution to automatically roll back and restore original
+          files if a script fails.
         </li>
         <li className="leading-relaxed whitespace-pre-wrap">
           <strong className="font-bold text-foreground/80">
             Ultra Minimalist API –{" "}
           </strong>
-          Features only 4 simple and robust functions (
+          Features only 5 simple and robust functions (
           <code className="font-mono text-xs font-bold text-sidebar-primary">
             gn
           </code>
           ,{" "}
           <code className="font-mono text-xs font-bold text-sidebar-primary">
             ex
+          </code>
+          ,{" "}
+          <code className="font-mono text-xs font-bold text-sidebar-primary">
+            xp
           </code>
           ,{" "}
           <code className="font-mono text-xs font-bold text-sidebar-primary">

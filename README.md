@@ -35,55 +35,74 @@ pip install ranno
 uv add ranno
 ```
 
-`Generate Code (No Execution)`
+`Generate Code (gn)`
 
 ```python
 from ranno import gn
 
-# Without Data
-print(gn("Create a list of 10 dinosaurs"))
+# Generate code silently
+code = gn("Create a list of 10 dinosaurs")
+print(code)
 
-# With Data
-print(gn("Find the average price", data="data.csv"))
+# Generate code with dataset context
+dataset_code = gn("Find the average salary", data="employees.csv")
+print(dataset_code)
 ```
 
-`Execute Code Instantly (Auto-Backup)`
+`Execute Code (ex)`
 
 ```python
 from ranno import ex
 
-# Without Data
-ex("Print hello world 5 times")
+# Execute prompt instantly
+ex("print('Hello from Ranno execution context')")
 
-# With Data
-ex("Plot price vs category", data="data.csv")
+# Execute tasks with dataset context
+ex("Plot salary vs department", data="employees.csv")
 ```
 
-`Save Code to File (Write to Disk)`
+`Explain Code & Scripts (xp)`
+
+```python
+from ranno import xp
+
+# Explain prompt directly
+explanation = xp("Explain how quicksort works in Python")
+print(explanation)
+
+# Explain local .py script file
+file_explanation = xp("Explain this code", data="script.py")
+print(file_explanation)
+```
+
+`Save Code to File (sv)`
 
 ```python
 from ranno import gn, sv
 
-# Generate code
+# Generate code silently
 code = gn("Download image from URL")
 
 # Save it to a file
 sv(code, name="file.py")
 ```
 
-`Custom Configuration (API & Model)`
+`Custom Configuration (cf)`
 
 ```python
-from ranno import cf, gn, ex
+from ranno import gn, ex, xp, cf
 
-# Set custom credentials & model (Gemini only)
-my_cfg = cf(api_key="api_key", model="model_name")
+# Configure custom credentials and model
+my_config = cf(api_key="api_key", model="model_name")
 
-# Run with custom config
-print(gn("Plot Sine Wave", config=my_cfg))
+# Run generation with custom config
+print(gn("Plot a sine wave", config=my_config))
 
-# Execute with custom config
-ex("Plot correlation", data="data.csv", config=my_cfg)
+# Run execution with custom config
+ex("Plot correlation heatmap", data="data.csv", config=my_config)
+
+# Run explanation with custom config
+print(xp("Explain decorators", config=my_config))
 ```
 
 ---
@@ -92,13 +111,12 @@ ex("Plot correlation", data="data.csv", config=my_cfg)
 
 | FEATURE | DESCRIPTION |
 | :---: | :---: |
-| **AI Code Generation** | Turns plain English prompts into full, runnable Python scripts |
-| **AI File Intelligence** | Detects file types (CSV, Excel, JSON) accurately, even without extensions |
-| **Auto Schema Extraction** | Reads columns and first 5 rows to build perfect AI context automatically |
-| **Instant Execution** | Runs AI-generated Python code directly with automated error handling |
-| **Custom Configuration** | Override default API keys and Models per request using `cf()` |
+| **AI Code Generation** | Turns plain English prompts into full, runnable Python scripts using `gn()` |
+| **Instant Execution** | Runs AI-generated Python code directly inside local scope using `ex()` |
+| **Code Explanation** | Explains Python prompts or `.py` script files step-by-step using `xp()` |
+| **AI File Intelligence** | Auto-detects column names, types, and schemas of local CSV, Excel, or JSON files |
 | **Shadow Copy Integrity** | Creates a hidden `copy.` snapshot before execution; restores on failure |
-| **Ultra Minimalism** | Four functions (`gn`, `ex`, `sv`, `cf`) is all you need - zero boilerplate |
+| **Ultra Minimalism** | Five functions (`gn`, `ex`, `xp`, `sv`, `cf`) is all you need - zero boilerplate |
 
 ---
 
@@ -106,7 +124,7 @@ ex("Plot correlation", data="data.csv", config=my_cfg)
 
 | # | COMPONENT | DESCRIPTION | STACK |
 | :---: | :---: | :---: | :---: |
-| 1️⃣ | **Ranno SDK** | The client-side library handling data prep & execution | **_Python_**, **_Magika_**, **_Pandas_** |
+| 1️⃣ | **Ranno SDK** | Client-side library handling data prep & execution | **_Python_**, **_Magika_**, **_Pandas_** |
 | 2️⃣ | **Ranno API** | Backend service for secure code generation | **_FastAPI_**, **_Hugging Face_**, **_Gemini_** |
 | 3️⃣ | **Ranno Docs** | Official documentation & web interface | **_Next.js_**, **_Tailwind_**, **_Vercel_** |
 
