@@ -25,7 +25,7 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-server = ["fastapi", "uvicorn", "openai", "python-dotenv"]
+server = ["fastapi[standard]", "openai", "python-dotenv"]
 
 [project.urls]
 "Repository" = "https://github.com/saptarshiroy39/ranno"
